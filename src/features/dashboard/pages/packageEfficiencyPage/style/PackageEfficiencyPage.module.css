@@ -1,0 +1,130 @@
+.pageLayout {
+  padding: 2rem;
+  background-color: #1c1c1f;
+  color: #c5c6c7;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.pageLayout h1 {
+  margin: 0;
+  text-align: center;
+  color: #fff;
+}
+
+.configSection {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #2a2a2e;
+  border-radius: 8px;
+}
+
+.configItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.configItem label {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.configItem input {
+  background-color: #1c1c1f;
+  color: #c5c6c7;
+  border: 1px solid #444;
+  border-radius: 4px;
+  padding: 0.75rem;
+  font-size: 1rem;
+}
+
+.addItemForm {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.addItemForm input {
+  background-color: #2a2a2e;
+  border: 1px solid #444;
+  border-radius: 4px;
+  padding: 0.75rem;
+  color: #fff;
+  font-size: 1rem;
+}
+.addItemForm input[type="text"] {
+  flex-grow: 1;
+}
+.addItemForm input[type="number"] {
+  width: 80px;
+}
+.addItemForm button {
+  padding: 0 1.5rem;
+  border-radius: 4px;
+  border: none;
+  background-color: #6b46c1;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.itemList {
+  background-color: #2a2a2e;
+  border-radius: 8px;
+  padding: 1rem;
+  flex-grow: 1;
+  overflow-y: auto;
+  min-height: 150px;
+}
+
+.itemRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  border-bottom: 1px solid #3a3a3e;
+}
+.itemRow:last-child {
+  border-bottom: none;
+}
+.itemValue {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.itemValue button {
+  background-color: #c23616;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.resultSection {
+  background-color: #2a2a2e;
+  border-radius: 8px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.resultItem {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.1rem;
+}
+.resultItem .label {
+  color: #888;
+}
+.resultItem .value {
+  font-weight: bold;
+}
+.profit { color: #00a8ff; }
+.loss { color: #e84118; }
