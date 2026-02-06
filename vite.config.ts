@@ -3,13 +3,11 @@ import { resolve } from 'node:path'
 import path from 'node:path'
 import electron from 'vite-plugin-electron/simple'
 import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
-    tailwindcss(),
     electron({
       main: {
         entry: 'electron/main.ts',
@@ -17,7 +15,7 @@ export default defineConfig({
         vite: {
           build: {
             rollupOptions: { 
-              external: ['sqlite3'], // sqlite3를 외부 모듈로 지정
+              external: ['@prisma/client'], // sqlite3를 외부 모듈로 지정
             },
           },
         },
@@ -37,7 +35,6 @@ export default defineConfig({
         main: resolve(__dirname, 'index.html'),
         settings: resolve(__dirname, 'settings.html'),
       },
-      external: ['sqlite3'],
     },
   },
 })

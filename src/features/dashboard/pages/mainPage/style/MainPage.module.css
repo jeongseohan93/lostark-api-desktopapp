@@ -1,0 +1,11 @@
+.mainPageGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 400px;
+    grid-template-areas: 
+    "event event event";
+
+}
+.event {
+    grid-area: event;
+}

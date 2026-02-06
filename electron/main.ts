@@ -1,175 +1,57 @@
-// electron/main.ts
+import { app, BrowserWindow } from 'electron';
+import path from 'path';
+import { createWindow } from './core/windows'; // 창 생성 함수
+import { registerFeatureHandlers } from './features/index'; // 기능별 IPC 핸들러 등록 함수
 
-import { app, BrowserWindow, ipcMain } from 'electron';
-import { createRequire } from 'node:module';
-import { fileURLToPath } from 'node:url';
-import path from 'node:path';
-import sqlite3 from 'sqlite3';
+// 현재 파일의 디렉토리 경로를 설정
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
-const require = createRequire(import.meta.url);
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
-// 환경 변수 및 경로 설정
+// --- 환경 변수 및 경로 설정 ---
+// 프로젝트의 루트 경로를 환경 변수에 저장합
 process.env.APP_ROOT = path.join(__dirname, '..');
+// Vite 개발 서버 URL과 빌드된 렌더러 파일 경로를 export하여 다른 모듈(예: windows.ts)에서 사용할 수 있게 함
 export const VITE_DEV_SERVER_URL = process.env['VITE_DEV_SERVER_URL'];
 export const RENDERER_DIST = path.join(process.env.APP_ROOT, 'dist');
+// public 디렉토리 경로를 환경 변수에 저장
 process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL ? path.join(process.env.APP_ROOT, 'public') : RENDERER_DIST;
 
+// 메인 윈도우 인스턴스를 저장할 변수
 let win: BrowserWindow | null;
-let settingsWin: BrowserWindow | null;
 
-// 데이터베이스 설정
-const dbPath = path.join(app.getPath('userData'), 'app.db');
-const db = new sqlite3.Database(dbPath, (err) => {
-  if (err) {
-    console.error('Database connection error:', err.message);
-  } else {
-    console.log('Connected to the database.');
-    db.run(`CREATE TABLE IF NOT EXISTS settings (
-      key TEXT PRIMARY KEY,
-      value TEXT NOT NULL
-    )`);
-  }
-});
-
-// 메인 창 생성 함수
-function createWindow() {
-  win = new BrowserWindow({
-    width: 800,
-    height: 600,
-    frame: false,
-    webPreferences: {
-      preload: path.join(__dirname, 'preload.mjs'),
-      sandbox: true,
-      contextIsolation: true,
-    },
-  });
-
-  if (VITE_DEV_SERVER_URL) {
-    win.loadURL(VITE_DEV_SERVER_URL);
-  } else {
-    win.loadFile(path.join(RENDERER_DIST, 'index.html'));
-  }
-}
-
-// 설정 창 생성 함수
-function createSettingsWindow() {
-  settingsWin = new BrowserWindow({
-    width: 400,
-    height: 500,
-    parent: win!,
-    modal: true,
-    show: false,
-    webPreferences: {
-      preload: path.join(__dirname, 'preload.mjs'),
-    },
-  });
-
-  if (VITE_DEV_SERVER_URL) {
-    settingsWin.loadURL(`${VITE_DEV_SERVER_URL}/settings.html`);
-  } else {
-    settingsWin.loadFile(path.join(RENDERER_DIST, 'settings.html'));
-  }
-
-  settingsWin.once('ready-to-show', () => {
-    settingsWin?.show();
-  });
-
-  settingsWin.on('closed', () => {
-    settingsWin = null;
-  });
-}
-
-// Electron 앱 생명주기 이벤트
+// --- 앱 생명주기 이벤트 핸들링 ---
+// 모든 창이 닫혔을 때 실행되는 이벤트
 app.on('window-all-closed', () => {
+  // macOS(darwin)가 아닌 경우, 앱을 완전히 종료합
   if (process.platform !== 'darwin') {
     app.quit();
-    win = null;
+    win = null; // 참조를 정리합니다.
   }
 });
 
+// 앱이 활성화되었을 때 실행되는 이벤트
 app.on('activate', () => {
+  // 열려 있는 창이 하나도 없을 경우에만 새 창을 생성
   if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
+    win = createWindow();
   }
 });
 
-// 앱 준비 완료 후 IPC 핸들러 등록
+// Electron 앱이 준비되면 실행되는 메인 로직
 app.whenReady().then(() => {
-  createWindow();
+  // 1. 메인 윈도우를 생성
+  win = createWindow();
+  // 2. 생성된 윈도우를 기반으로 모든 기능(IPC 핸들러)을 등록
+  registerFeatureHandlers(win);
 
-  ipcMain.handle('save-api-key', (_, apiKey) => {
-    return new Promise((resolve, reject) => {
-      db.run(`INSERT OR REPLACE INTO settings (key, value) VALUES (?, ?)`, ['api_key', apiKey], (err) => {
-        if (err) reject('데이터베이스 저장 실패');
-        else resolve('저장 성공');
-      });
-    });
-  });
-
-  ipcMain.handle('check-api-key', () => {
-    return new Promise((resolve) => {
-      db.get(`SELECT value FROM settings WHERE key = ?`, ['api_key'], (err, row) => {
-        if (err) resolve(false);
-        else resolve(!!row);
-      });
-    });
-  });
-
-  ipcMain.handle('get-island-info', async () => {
-    const apiKey = await new Promise<string | null>((resolve) => {
-      db.get("SELECT value FROM settings WHERE key = ?", ['api_key'], (err, row) => {
-        resolve(err || !row ? null : row.value);
-      });
-    });
-    if (!apiKey) throw new Error('API 키가 데이터베이스에 존재하지 않습니다.');
-    const response = await fetch('https://developer-lostark.game.onstove.com/gamecontents/calendar', {
-      headers: {
-        'accept': 'application/json',
-        'authorization': `bearer ${apiKey}`
-      }
-    });
-    if (!response.ok) throw new Error(`API 서버 오류: ${response.statusText}`);
-    return response.json();
-  });
-
-  ipcMain.handle('open-settings-window', () => {
-    if (!settingsWin) createSettingsWindow();
-  });
-
-  ipcMain.handle('close-settings-window', () => {
-    settingsWin?.close();
-  });
-
-  ipcMain.handle('delete-api-key', () => {
-    return new Promise((resolve, reject) => {
-      db.run(`DELETE FROM settings WHERE key = ?`, ['api_key'], function(err) {
-        if (err) reject('API 키 삭제 실패');
-        else resolve('삭제 성공');
-      });
-    });
-  });
-
-  // 설정 창의 신호를 받아 메인 창으로 방송
-  ipcMain.on('notify-api-key-deleted', () => {
-    win?.webContents.send('api-key-deleted-event');
-  });
-
-  ipcMain.on('minimize-window', () => {
-    win?.minimize();
-  });
-
-  ipcMain.on('maximize-window', () => {
-    if (win?.isMaximized()) {
-      win.unmaximize();
+  // Vite 개발 서버 URL이 있는 경우 (개발 모드일 때)
+    if (VITE_DEV_SERVER_URL) {
+      // 개발 서버의 URL을 로드
+      win.loadURL(VITE_DEV_SERVER_URL);
     } else {
-      win?.maximize();
+      // 그렇지 않으면 빌드된 index.html 파일을 로드 (프로덕션 모드)
+      win.loadFile(path.join(RENDERER_DIST, 'index.html'));
     }
-  });
-
-  ipcMain.on('close-window', () => {
-    win?.close();
-  });
 });
+
 
 
