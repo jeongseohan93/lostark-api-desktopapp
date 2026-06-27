@@ -55,6 +55,58 @@
 .itemLevel p { margin: 0; color: #aaa; }
 .itemLevel span { font-size: 2.5rem; font-weight: bold; color: #d28c28; }
 
+.estimatedCp {
+  text-align: center;
+  background-color: #1c1c1f;
+  border: 1px solid #3f3f46;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.estimatedCp p {
+  margin: 0 0 0.2rem;
+  font-size: 0.75rem;
+  color: #a1a1aa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.estimatedCp span {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #a78bfa;
+}
+
+.estimatedCpR2 {
+  font-size: 0.68rem !important;
+  background-color: #1d4ed8;
+  color: #fff !important;
+  padding: 0.1rem 0.35rem;
+  border-radius: 999px;
+}
+
+.estimatedCpLocked {
+  text-align: center;
+  background-color: #1c1c1f;
+  border: 1px solid #3f3f46;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.estimatedCpLocked p {
+  margin: 0 0 0.2rem;
+  font-size: 0.75rem;
+  color: #a1a1aa;
+}
+
+.estimatedCpLocked span {
+  font-size: 0.7rem;
+  color: #52525b;
+  display: block;
+}
+
 .basicInfo { font-size: 0.9rem; }
 .infoRow { display: flex; margin-bottom: 0.5rem; }
 .infoRow label { width: 60px; color: #888; }

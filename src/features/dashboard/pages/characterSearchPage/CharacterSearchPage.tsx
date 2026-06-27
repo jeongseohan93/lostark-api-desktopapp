@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import {
     getCharacterSiblings,
     getArmoryProfiles,
@@ -13,6 +13,8 @@ import type {
     ArmoryEngravings,
     ArmoryGems,
 } from '../../../../shared/types/lostark.types';
+import type { SavedFormula } from '../combatPowerPage/CombatPowerPage';
+import { FORMULA_KEY } from '../combatPowerPage/CombatPowerPage';
 import style from './style/CharacterSearchPage.module.css';
 
 interface ArmoryData {
@@ -38,6 +40,13 @@ const CharacterSearchPage = () => {
     const [searchLoading, setSearchLoading] = useState(false);
     const [armoryLoading, setArmoryLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [savedFormula, setSavedFormula] = useState<SavedFormula | null>(null);
+
+    useEffect(() => {
+        const raw = localStorage.getItem(FORMULA_KEY);
+        if (!raw) return;
+        try { setSavedFormula(JSON.parse(raw)); } catch { /* ignore */ }
+    }, []);
 
     const loadArmory = async (char: CharacterInfo) => {
         setSelectedChar(char);
@@ -87,6 +96,23 @@ const CharacterSearchPage = () => {
             setSearchLoading(false);
         }
     };
+
+    const estimatedCombatPower = useMemo(() => {
+        if (!armory || !savedFormula) return null;
+        const { coefficients } = savedFormula;
+        const itemAvgLevel = parseFloat(armory.profile.ItemAvgLevel.replace(/,/g, '')) || 0;
+        const engravingCount = armory.engravings.Effects?.length ?? 0;
+        const totalGemLevel = armory.gems.Gems?.reduce((s, g) => s + g.Level, 0) ?? 0;
+        const statMap: Record<string, number> = {};
+        armory.profile.Stats?.forEach(s => { statMap[s.Type] = Number(s.Value) || 0; });
+        const features = [
+            itemAvgLevel, engravingCount, totalGemLevel,
+            statMap['치명'] ?? 0, statMap['특화'] ?? 0, statMap['제압'] ?? 0,
+            statMap['신속'] ?? 0, statMap['인내'] ?? 0, statMap['숙련'] ?? 0,
+        ];
+        const pred = coefficients[0] + features.reduce((s, x, i) => s + x * coefficients[i + 1], 0);
+        return Math.round(pred);
+    }, [armory, savedFormula]);
 
     const basicStats = armory?.profile.Stats.filter(s => !COMBAT_STAT_TYPES.includes(s.Type)) ?? [];
     const combatStats = armory?.profile.Stats.filter(s => COMBAT_STAT_TYPES.includes(s.Type)) ?? [];
@@ -141,6 +167,17 @@ const CharacterSearchPage = () => {
                             <p>장착 아이템 레벨</p>
                             <span>Lv.{armory.profile.ItemAvgLevel}</span>
                         </div>
+                        {estimatedCombatPower !== null ? (
+                            <div className={style.estimatedCp}>
+                                <p>추정 전투력 <span className={style.estimatedCpR2}>R² {(savedFormula!.r2 * 100).toFixed(1)}%</span></p>
+                                <span>{estimatedCombatPower.toLocaleString()}</span>
+                            </div>
+                        ) : (
+                            <div className={style.estimatedCpLocked}>
+                                <p>추정 전투력</p>
+                                <span>전투력 역추산 수집기에서 공식 도출 후 표시</span>
+                            </div>
+                        )}
                         <div className={style.basicInfo}>
                             {armory.profile.Title && (
                                 <div className={style.infoRow}>

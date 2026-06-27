@@ -10,6 +10,15 @@ import type { RegressionResult } from './utils/regression';
 import style from './style/CombatPowerPage.module.css';
 
 const STORAGE_KEY = 'loa_cp_dataset';
+export const FORMULA_KEY = 'loa_cp_formula';
+
+export interface SavedFormula {
+    coefficients: number[];
+    featureNames: string[];
+    r2: number;
+    dataCount: number;
+    updatedAt: string;
+}
 
 const COMBAT_STAT_TYPES = ['치명', '특화', '제압', '신속', '인내', '숙련'];
 const FEATURE_NAMES = ['아이템 레벨', '각인 효과 수', '보석 합산 레벨', '치명', '특화', '제압', '신속', '인내', '숙련'];
@@ -158,8 +167,17 @@ const CombatPowerPage = () => {
         if (dataset.length < MIN_POINTS) return;
         const X = dataset.map(extractFeatures);
         const y = dataset.map(d => d.combatPower);
-        setRegression(linearRegression(X, y, FEATURE_NAMES));
+        const result = linearRegression(X, y, FEATURE_NAMES);
+        setRegression(result);
         setPredictResult(null);
+        const saved: SavedFormula = {
+            coefficients: result.coefficients,
+            featureNames: result.featureNames,
+            r2: result.r2,
+            dataCount: dataset.length,
+            updatedAt: new Date().toISOString(),
+        };
+        localStorage.setItem(FORMULA_KEY, JSON.stringify(saved));
     };
 
     const handlePredict = async () => {
