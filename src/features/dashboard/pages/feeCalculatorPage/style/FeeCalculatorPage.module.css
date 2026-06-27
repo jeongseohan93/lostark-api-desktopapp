@@ -1,0 +1,257 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: #1c1c1f;
+    color: #c5c6c7;
+    padding: 1.25rem;
+    overflow-y: auto;
+    gap: 1.25rem;
+}
+
+.title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fafafa;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.desc {
+    font-size: 0.82rem;
+    color: #71717a;
+    margin: 0;
+    flex-shrink: 0;
+    line-height: 1.5;
+}
+
+/* Mode tabs */
+.tabs {
+    display: flex;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+.tab {
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
+    border: 1px solid #3f3f46;
+    background: none;
+    color: #71717a;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.12s;
+}
+
+.tab:hover { border-color: #6b46c1; color: #c4b5fd; }
+
+.tabActive {
+    background-color: #6b46c1;
+    border-color: #7c3aed;
+    color: #fff;
+}
+
+/* Calculator card */
+.card {
+    background-color: #2a2a2e;
+    border: 1px solid #3f3f46;
+    border-radius: 10px;
+    padding: 1.25rem;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.inputRow {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.inputRow label {
+    font-size: 0.82rem;
+    color: #a1a1aa;
+    min-width: 160px;
+}
+
+.goldInput {
+    flex: 1;
+    min-width: 140px;
+    max-width: 220px;
+    padding: 0.45rem 0.75rem;
+    background-color: #1c1c1f;
+    border: 1px solid #3f3f46;
+    border-radius: 6px;
+    color: #fafafa;
+    font-size: 0.95rem;
+    text-align: right;
+}
+
+.goldInput:focus {
+    outline: none;
+    border-color: #6b46c1;
+}
+
+.goldUnit {
+    font-size: 0.85rem;
+    color: #facc15;
+    font-weight: 600;
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid #3f3f46;
+    margin: 0;
+}
+
+/* Result rows */
+.resultRow {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.resultLabel {
+    font-size: 0.82rem;
+    color: #a1a1aa;
+    min-width: 160px;
+    flex-shrink: 0;
+}
+
+.resultValue {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fafafa;
+}
+
+.resultValueMain {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #facc15;
+}
+
+.resultValueGreen {
+    color: #4ade80;
+}
+
+.copyBtn {
+    margin-left: auto;
+    padding: 0.25rem 0.65rem;
+    background: none;
+    border: 1px solid #3f3f46;
+    border-radius: 5px;
+    color: #71717a;
+    font-size: 0.72rem;
+    cursor: pointer;
+    transition: all 0.12s;
+}
+
+.copyBtn:hover { border-color: #6b46c1; color: #c4b5fd; }
+.copyBtnDone { border-color: #4ade80 !important; color: #4ade80 !important; }
+
+/* Formula box */
+.formulaBox {
+    background-color: #18181b;
+    border: 1px solid #27272a;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    flex-shrink: 0;
+}
+
+.formulaTitle {
+    font-size: 0.72rem;
+    color: #52525b;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 0.5rem;
+    font-weight: 600;
+}
+
+.formulaLine {
+    font-size: 0.8rem;
+    color: #71717a;
+    margin-bottom: 0.3rem;
+    font-family: monospace;
+}
+
+.formulaLine strong {
+    color: #a78bfa;
+}
+
+/* Quick reference table */
+.tableCard {
+    background-color: #2a2a2e;
+    border: 1px solid #3f3f46;
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    flex-shrink: 0;
+}
+
+.tableTitle {
+    font-size: 0.8rem;
+    color: #71717a;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 0.75rem;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+}
+
+.table th, .table td {
+    padding: 0.4rem 0.75rem;
+    border: 1px solid #3f3f46;
+    text-align: right;
+}
+
+.table th {
+    background-color: #27272a;
+    color: #a1a1aa;
+    text-align: center;
+}
+
+.table td:first-child { text-align: center; color: #71717a; }
+.table .goldCell { color: #facc15; font-weight: 600; }
+.table .greenCell { color: #4ade80; }
+
+/* Spec planner placeholder */
+.comingSoonCard {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border: 1px dashed #3f3f46;
+    border-radius: 10px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.comingSoonTitle {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #a1a1aa;
+    margin: 0 0 0.5rem;
+}
+
+.comingSoonDesc {
+    font-size: 0.82rem;
+    color: #52525b;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.badge {
+    display: inline-block;
+    margin-top: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    background-color: #27272a;
+    border: 1px solid #3f3f46;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    color: #71717a;
+}
