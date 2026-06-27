@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import style from '../style/SideBar.module.css';
-import { FiMenu, FiHome, FiShoppingCart, FiRepeat, FiSearch, FiPackage, FiSettings, FiBarChart2, FiStar, FiTarget, FiDollarSign, FiTrendingUp, FiPercent } from "react-icons/fi";
+import { FiMenu, FiHome, FiShoppingCart, FiRepeat, FiSearch, FiPackage, FiSettings, FiBarChart2, FiStar, FiTarget, FiDollarSign, FiTrendingUp, FiPercent, FiUsers, FiDroplet } from "react-icons/fi";
 import { FaLeaf } from 'react-icons/fa';
 import { openSetting } from '../../../shared/api/IpcSetting';
 
@@ -83,6 +83,16 @@ const SideBar = () => {
           <NavLink to = "/feeCalc" className={getNavLinkClass}>
             <FiPercent className={style.icon} />
             <span className={style.iconLabel}>수수료 계산기</span>
+          </NavLink>
+
+          <NavLink to = "/raidAuction" className={getNavLinkClass}>
+            <FiUsers className={style.icon} />
+            <span className={style.iconLabel}>경매 배분기</span>
+          </NavLink>
+
+          <NavLink to = "/crystalTracker" className={getNavLinkClass}>
+            <FiDroplet className={style.icon} />
+            <span className={style.iconLabel}>크리스탈 시세</span>
           </NavLink>
 
         </div>

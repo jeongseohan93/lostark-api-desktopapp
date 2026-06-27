@@ -1,0 +1,272 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: #1c1c1f;
+    color: #c5c6c7;
+    padding: 1.25rem;
+    overflow-y: auto;
+    gap: 1.25rem;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+.title { font-size: 1.2rem; font-weight: 700; color: #fafafa; margin: 0; }
+
+.resetBtn {
+    padding: 0.35rem 0.9rem;
+    background: none;
+    border: 1px solid #3f3f46;
+    border-radius: 6px;
+    color: #71717a;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+.resetBtn:hover { border-color: #f87171; color: #f87171; }
+
+/* Setup */
+.setupCard {
+    background-color: #2a2a2e;
+    border: 1px solid #3f3f46;
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    flex-shrink: 0;
+}
+
+.sectionLabel {
+    font-size: 0.8rem;
+    color: #71717a;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 0.75rem;
+}
+
+.memberGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.memberChip {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background-color: #18181b;
+    border: 1px solid #3f3f46;
+    border-radius: 6px;
+    padding: 0.3rem 0.5rem;
+}
+
+.memberChipFree { border-color: #a16207; background-color: #1c1408; }
+
+.memberName {
+    font-size: 0.82rem;
+    color: #fafafa;
+    min-width: 60px;
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0;
+}
+
+.freeToggle {
+    font-size: 0.65rem;
+    padding: 0.1rem 0.35rem;
+    background: none;
+    border: 1px solid #3f3f46;
+    border-radius: 4px;
+    color: #52525b;
+    cursor: pointer;
+}
+
+.freeToggleOn {
+    border-color: #a16207;
+    color: #fbbf24;
+    background-color: #1c1408;
+}
+
+.removeMemberBtn {
+    background: none;
+    border: none;
+    color: #3f3f46;
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 0 0.1rem;
+    line-height: 1;
+}
+.removeMemberBtn:hover { color: #f87171; }
+
+.addMemberRow {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.addMemberInput {
+    padding: 0.35rem 0.6rem;
+    background-color: #1c1c1f;
+    border: 1px solid #3f3f46;
+    border-radius: 6px;
+    color: #fafafa;
+    font-size: 0.82rem;
+    width: 140px;
+}
+
+.addMemberBtn {
+    padding: 0.35rem 0.75rem;
+    background-color: #6b46c1;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 0.82rem;
+    cursor: pointer;
+}
+.addMemberBtn:hover { background-color: #7c3aed; }
+
+.distributionRow {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.distributionRow label { font-size: 0.8rem; color: #a1a1aa; }
+
+.radioGroup { display: flex; gap: 0.5rem; }
+
+.radioLabel {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.8rem;
+    color: #c5c6c7;
+    cursor: pointer;
+}
+
+/* Bid form */
+.bidCard {
+    background-color: #2a2a2e;
+    border: 1px solid #3f3f46;
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    flex-shrink: 0;
+}
+
+.bidRow {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.bidField {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.bidField label { font-size: 0.72rem; color: #71717a; }
+
+.bidField input,
+.bidField select {
+    padding: 0.35rem 0.6rem;
+    background-color: #1c1c1f;
+    border: 1px solid #3f3f46;
+    border-radius: 6px;
+    color: #fafafa;
+    font-size: 0.85rem;
+}
+
+.bidField input { width: 130px; }
+.bidField select { min-width: 110px; }
+
+.addBidBtn {
+    padding: 0.4rem 1rem;
+    background-color: #6b46c1;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 0.85rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    align-self: flex-end;
+}
+.addBidBtn:hover { background-color: #7c3aed; }
+
+/* Bid history */
+.bidHistory {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-top: 0.75rem;
+}
+
+.bidItem {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.82rem;
+    background-color: #18181b;
+    border: 1px solid #27272a;
+    border-radius: 6px;
+    padding: 0.4rem 0.75rem;
+    flex-wrap: wrap;
+}
+
+.bidIdx { color: #52525b; min-width: 18px; }
+.bidItemName { color: #fafafa; flex: 1; min-width: 80px; }
+.bidWinner { color: #c4b5fd; font-weight: 600; }
+.bidAmount { color: #facc15; font-weight: 700; }
+.bidShare { color: #4ade80; font-size: 0.75rem; }
+
+.removeBidBtn {
+    background: none;
+    border: none;
+    color: #3f3f46;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-left: auto;
+}
+.removeBidBtn:hover { color: #f87171; }
+
+/* Result */
+.resultCard {
+    background: linear-gradient(135deg, #1e1b4b, #2e1e5e);
+    border: 1px solid #6b46c1;
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    flex-shrink: 0;
+}
+
+.resultTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.resultTable th, .resultTable td {
+    padding: 0.45rem 0.75rem;
+    border: 1px solid #3f3f46;
+    text-align: center;
+}
+
+.resultTable th { background-color: #1e1b4b; color: #a1a1aa; }
+.resultTable td { background-color: #1a1730; }
+
+.tdName { font-weight: 600; color: #fafafa; text-align: left !important; }
+.tdPaid { color: #f87171; }
+.tdReceived { color: #4ade80; }
+.tdNet { font-weight: 700; }
+.tdNetPos { color: #facc15; }
+.tdNetNeg { color: #f87171; }
+.tdFree { color: #71717a; font-size: 0.72rem; }
+
+.totalRow td { background-color: #0f0d1a; font-weight: 700; border-top: 2px solid #6b46c1; }

@@ -16,6 +16,8 @@ import WeeklyGoldPage from './pages/weeklyGoldPage/WeeklyGoldPage';
 import EnhancementPage from './pages/enhancementPage/EnhancementPage';
 import AuctionSniperPage from './pages/auctionSniperPage/AuctionSniperPage';
 import FeeCalculatorPage from './pages/feeCalculatorPage/FeeCalculatorPage';
+import RaidAuctionPage from './pages/raidAuctionPage/RaidAuctionPage';
+import CrystalTrackerPage from './pages/crystalTrackerPage/CrystalTrackerPage';
 import { FavoritesProvider } from '../../shared/context/FavoritesContext';
 import { AuctionSniperProvider } from '../../shared/context/AuctionSniperContext';
 
@@ -42,6 +44,8 @@ const DashBoard = () => {
               <Route path = "/enhancement" element={<EnhancementPage/>}/>
               <Route path = "/auctionSniper" element={<AuctionSniperPage/>}/>
               <Route path = "/feeCalc" element={<FeeCalculatorPage/>}/>
+              <Route path = "/raidAuction" element={<RaidAuctionPage/>}/>
+              <Route path = "/crystalTracker" element={<CrystalTrackerPage/>}/>
             </Routes>
           </main>
         </div>
