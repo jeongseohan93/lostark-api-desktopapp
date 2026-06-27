@@ -131,3 +131,81 @@
   height: 100%;
   background-color: #6b46c1;
 }
+
+.siblingsBar {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem 0;
+  overflow-x: auto;
+  flex-shrink: 0;
+  scrollbar-width: thin;
+  scrollbar-color: #444 transparent;
+}
+
+.siblingCard {
+  flex-shrink: 0;
+  background-color: #2a2a2e;
+  border: 1px solid #444;
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  text-align: center;
+  min-width: 100px;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+
+.siblingCard:hover { background-color: #3a3a3e; border-color: #666; }
+
+.activeSibling { border-color: #6b46c1 !important; background-color: #3a2a5e !important; }
+
+.sibClassName { font-size: 0.7rem; color: #888; margin-bottom: 0.2rem; }
+.sibName      { font-size: 0.85rem; color: #fafafa; font-weight: 600; }
+.sibLevel     { font-size: 0.75rem; color: #d28c28; margin-top: 0.2rem; }
+
+.errorBox {
+  background-color: #2a1a1a;
+  border: 1px solid #f87171;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  color: #f87171;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.loadingBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  color: #888;
+  font-size: 0.875rem;
+}
+
+.gemGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+
+.gemSlot {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #444;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.gemSlot img { width: 100%; height: 100%; object-fit: cover; }
+
+.gemSlot span {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0,0,0,0.7);
+  color: #ffd700;
+  font-size: 0.65rem;
+  padding: 0.05rem 0.2rem;
+  border-radius: 2px 0 0 0;
+}

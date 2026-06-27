@@ -35,7 +35,8 @@ export const initializeApiClient = async () => {
     }
 }
 
-const requireClient = () => {
+// 다른 핸들러 모듈에서 공유하는 단일 클라이언트 접근자
+export const requireClient = () => {
     if (!apiClient) throw new Error('API 클라이언트가 준비되지 않았습니다. API 키를 확인해주세요.');
     return apiClient;
 };

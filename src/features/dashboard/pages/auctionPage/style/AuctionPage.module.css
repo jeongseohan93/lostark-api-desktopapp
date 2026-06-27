@@ -173,3 +173,155 @@
   font-size: 2rem;
   margin: 0 auto 1rem;
 }
+
+.sidebarTitle {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #888;
+  margin: 0 0 0.5rem 0;
+  padding: 0.5rem 0.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.subList {
+  list-style: none;
+  padding: 0 0 0 0.75rem;
+  margin: 0.15rem 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.subItem {
+  font-size: 0.82rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  color: #888;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.subItem:hover { background-color: #3a3a3e; color: #fafafa; }
+
+.categoryList details > summary {
+  cursor: pointer;
+  padding: 0.4rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: background-color 0.15s;
+  color: #c5c6c7;
+}
+
+.categoryList details > summary::before {
+  content: '▶';
+  font-size: 0.6rem;
+  color: #555;
+  transition: transform 0.2s;
+}
+
+.categoryList details[open] > summary::before { transform: rotate(90deg); }
+.categoryList details > summary:hover { background-color: #3a3a3e; }
+
+.stateBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  color: #666;
+  font-size: 0.875rem;
+}
+
+.itemRow:hover td { background-color: #3a3a3e; }
+
+.itemTable td {
+  padding: 0.625rem 0.75rem;
+  border-bottom: 1px solid #3a3a3e;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.itemTable tr:last-child td { border-bottom: none; }
+
+.itemCell {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: left;
+}
+
+.itemIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 0.25rem;
+  border: 1px solid #444;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.itemName { font-weight: 500; color: #fafafa; font-size: 0.875rem; }
+.itemGrade { font-size: 0.75rem; color: #888; }
+
+.grade-일반  { color: #9d9d9d; }
+.grade-고급  { color: #1eff00; }
+.grade-희귀  { color: #0070dd; }
+.grade-영웅  { color: #a335ee; }
+.grade-전설  { color: #ff8000; }
+.grade-유물  { color: #e06c30; }
+.grade-고대  { color: #cca800; }
+
+.quality { font-size: 0.85rem; color: #a1a1aa; }
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  justify-content: center;
+}
+
+.optTag {
+  font-size: 0.75rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.2rem;
+  background-color: #3a3a3e;
+  color: #c5c6c7;
+  white-space: nowrap;
+}
+
+.penalty { color: #f87171; }
+
+.goldPrice { color: #fbbf24; font-weight: 600; font-size: 0.875rem; }
+.endTime   { font-size: 0.8rem; color: #a1a1aa; white-space: nowrap; }
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  padding: 0.75rem;
+  border-top: 1px solid #3a3a3e;
+}
+
+.pageBtn {
+  background: none;
+  border: 1px solid #444;
+  color: #888;
+  border-radius: 0.25rem;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background-color 0.15s;
+}
+
+.pageBtn:hover { background-color: #3a3a3e; color: #fafafa; }
+.pageBtn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.pageInfo { font-size: 0.8rem; color: #666; padding: 0 0.5rem; }
