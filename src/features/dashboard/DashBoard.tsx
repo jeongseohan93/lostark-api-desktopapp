@@ -10,6 +10,7 @@ import ActionPage from './pages/auctionPage/AuctionPage';
 import PackageEfficiencyPage from './pages/packageEfficiencyPage/PackageEfficiencyPage';
 import CharacterSearchPage from './pages/characterSearchPage/CharacterSearchPage';
 import EnergyOfLifePage from './pages/energyOfLifePage/EnergyOfLifePage';
+import CombatPowerPage from './pages/combatPowerPage/CombatPowerPage';
 
 const DashBoard = () => {
     useWindowSize(1200, 700);
@@ -26,6 +27,7 @@ const DashBoard = () => {
             <Route path = "/chSearch" element={<CharacterSearchPage/>}/>
             <Route path = "/package" element={<PackageEfficiencyPage/>}/>
             <Route path = "/lifeEnergy" element={<EnergyOfLifePage/>}/>
+            <Route path = "/combatPower" element={<CombatPowerPage/>}/>
           </Routes>
         </main>
       </div>

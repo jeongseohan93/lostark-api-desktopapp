@@ -1,0 +1,419 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 100%;
+    color: #e4e4e7;
+    overflow-y: auto;
+    padding: 0.25rem;
+}
+
+/* ── 헤더 ── */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #27272a;
+    border: 1px solid #3f3f46;
+    border-radius: 0.75rem;
+    padding: 0.875rem 1.25rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.headerTitle {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fafafa;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.headerTitle span {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: #a1a1aa;
+}
+
+.searchRow {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex: 1;
+    min-width: 300px;
+}
+
+.searchRow input {
+    flex: 1;
+    background-color: #18181b;
+    color: #e4e4e7;
+    border: 1px solid #3f3f46;
+    border-radius: 0.375rem;
+    padding: 0.45rem 0.75rem;
+    font-size: 0.875rem;
+}
+
+.fetchBtn {
+    background-color: #3b82f6;
+    color: #fff;
+    border: none;
+    border-radius: 0.375rem;
+    padding: 0.45rem 1.1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.15s;
+}
+
+.fetchBtn:hover { background-color: #2563eb; }
+.fetchBtn:disabled { background-color: #3f3f46; cursor: not-allowed; }
+
+.countBadge {
+    background-color: #1d4ed8;
+    color: #fff;
+    border-radius: 999px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* ── 입력 영역 ── */
+.inputGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.card {
+    background-color: #27272a;
+    border: 1px solid #3f3f46;
+    border-radius: 0.75rem;
+    padding: 1rem 1.25rem;
+}
+
+.cardTitle {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #a1a1aa;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 0.875rem 0;
+}
+
+/* 캐릭터 정보 */
+.charName {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fafafa;
+    margin: 0 0 0.125rem;
+}
+
+.charClass {
+    font-size: 0.8rem;
+    color: #a1a1aa;
+    margin: 0 0 0.75rem;
+}
+
+.statGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.375rem;
+}
+
+.statItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    padding: 0.3rem 0.5rem;
+    background-color: #18181b;
+    border-radius: 0.25rem;
+}
+
+.statLabel { color: #a1a1aa; }
+.statValue { color: #fafafa; font-weight: 600; }
+.statValueGold { color: #fbbf24; font-weight: 700; }
+
+.placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    color: #52525b;
+    font-size: 0.875rem;
+}
+
+/* 전투력 입력 */
+.cpInputArea {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.cpInputRow {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.cpInput {
+    flex: 1;
+    background-color: #18181b;
+    color: #e4e4e7;
+    border: 1px solid #3f3f46;
+    border-radius: 0.375rem;
+    padding: 0.6rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.cpInput:focus {
+    outline: none;
+    border-color: #3b82f6;
+}
+
+.saveBtn {
+    background-color: #16a34a;
+    color: #fff;
+    border: none;
+    border-radius: 0.375rem;
+    padding: 0.6rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.15s;
+}
+
+.saveBtn:hover { background-color: #15803d; }
+.saveBtn:disabled { background-color: #3f3f46; cursor: not-allowed; }
+
+.cpHint {
+    font-size: 0.78rem;
+    color: #71717a;
+    line-height: 1.5;
+}
+
+/* ── 데이터 테이블 ── */
+.tableSection {
+    background-color: #27272a;
+    border: 1px solid #3f3f46;
+    border-radius: 0.75rem;
+    overflow: hidden;
+}
+
+.tableSectionHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1.25rem;
+    border-bottom: 1px solid #3f3f46;
+}
+
+.tableSectionTitle {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #fafafa;
+    margin: 0;
+}
+
+.clearBtn {
+    background: none;
+    border: 1px solid #3f3f46;
+    border-radius: 0.375rem;
+    color: #f87171;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: background-color 0.15s;
+}
+
+.clearBtn:hover { background-color: #3f1f1f; }
+
+.tableWrapper {
+    overflow-x: auto;
+    max-height: 240px;
+    overflow-y: auto;
+}
+
+.dataTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+}
+
+.dataTable th {
+    padding: 0.5rem 0.875rem;
+    text-align: center;
+    color: #a1a1aa;
+    font-weight: 500;
+    background-color: #1f1f23;
+    border-bottom: 1px solid #3f3f46;
+    white-space: nowrap;
+}
+
+.dataTable th:first-child { text-align: left; }
+
+.dataTable td {
+    padding: 0.5rem 0.875rem;
+    border-bottom: 1px solid #3f3f46;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.dataTable tr:last-child td { border-bottom: none; }
+.dataTable tr:hover td { background-color: #3f3f46; }
+
+.tdLeft { text-align: left !important; }
+.tdGold { color: #fbbf24; font-weight: 600; }
+
+.deleteRowBtn {
+    background: none;
+    border: none;
+    color: #52525b;
+    cursor: pointer;
+    font-size: 0.875rem;
+    padding: 0.1rem 0.3rem;
+    border-radius: 0.25rem;
+    transition: color 0.15s;
+}
+
+.deleteRowBtn:hover { color: #f87171; }
+
+.emptyTable {
+    text-align: center;
+    padding: 2rem;
+    color: #52525b;
+    font-size: 0.875rem;
+}
+
+/* ── 분석 영역 ── */
+.analysisSection {
+    background-color: #27272a;
+    border: 1px solid #3f3f46;
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.analysisSectionHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.analysisSectionTitle {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #fafafa;
+    margin: 0;
+}
+
+.analyzeBtn {
+    background-color: #7c3aed;
+    color: #fff;
+    border: none;
+    border-radius: 0.375rem;
+    padding: 0.45rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s;
+}
+
+.analyzeBtn:hover { background-color: #6d28d9; }
+.analyzeBtn:disabled { background-color: #3f3f46; cursor: not-allowed; }
+
+.lockedHint {
+    color: #52525b;
+    font-size: 0.8rem;
+}
+
+.formulaBox {
+    background-color: #18181b;
+    border: 1px solid #3f3f46;
+    border-radius: 0.5rem;
+    padding: 1rem 1.25rem;
+}
+
+.r2Row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.875rem;
+}
+
+.r2Label { font-size: 0.8rem; color: #a1a1aa; }
+
+.r2Value {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #4ade80;
+}
+
+.r2Bad { color: #f87171; }
+.r2Mid { color: #fbbf24; }
+
+.formulaText {
+    font-size: 0.78rem;
+    color: #a1a1aa;
+    line-height: 1.9;
+    font-family: monospace;
+}
+
+.formulaCoeff { color: #fbbf24; font-weight: 600; }
+.formulaVar   { color: #60a5fa; }
+
+.predictRow {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.predictRow input {
+    background-color: #18181b;
+    color: #e4e4e7;
+    border: 1px solid #3f3f46;
+    border-radius: 0.375rem;
+    padding: 0.45rem 0.75rem;
+    font-size: 0.875rem;
+    flex: 1;
+    min-width: 180px;
+}
+
+.predictBtn {
+    background-color: #0891b2;
+    color: #fff;
+    border: none;
+    border-radius: 0.375rem;
+    padding: 0.45rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.15s;
+}
+
+.predictBtn:hover { background-color: #0e7490; }
+.predictBtn:disabled { background-color: #3f3f46; cursor: not-allowed; }
+
+.predictResult {
+    font-size: 0.875rem;
+    color: #fbbf24;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.error {
+    color: #f87171;
+    font-size: 0.8rem;
+    padding: 0.5rem 0;
+}
