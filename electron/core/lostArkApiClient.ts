@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { LOSTARK_API } from './loatArkEndPoint'; // 로스트아크 API에 요청하는 엔드포인트 주소 
+import { LOSTARK_API } from './lostArkEndPoint';
 
 // 로스트 아크 API와 통신하기 위한 클라이언트 클래스 입니다.
 // 이 클래스는 api 키를 사용하여 인증하고, 다양한 엔드포인트에 대한 요청을 보냅니다.

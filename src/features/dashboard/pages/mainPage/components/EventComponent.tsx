@@ -1,145 +1,90 @@
 import { useState } from 'react';
 import { useEvent } from '../hooks/useLostArkEvent';
 import { openExternal } from '../../../../../shared/api/IpcWindow';
-import { SlArrowLeft,  SlArrowRight } from 'react-icons/sl'
+import { SlArrowLeft, SlArrowRight } from 'react-icons/sl';
+import pageStyle from '../style/MainPage.module.css';
 import style from '../style/EventComponent.module.css';
 
+const EVENT_VIEW_COUNT = 4;
+
 const EventComponent = () => {
+    const { event, loading, error } = useEvent();
+    const [startIndex, setStartIndex] = useState(0);
+    const [emphasizeIndex, setEmphasizeIndex] = useState(0);
 
-    const { event , loading, error } = useEvent();
-
-    const [ startIndex , setStartIndex ] = useState<number>(0);
-
-    const [ emphasizeIndex, setEmphasizeIndex ] = useState<number>(0);
-
-    const EVENT_VIEW_COUNT = 4;
-
-    const eventPrevBefore = () => {
-       
-    }
-
-    const eventPrevNext = () => {
-
-    setEmphasizeIndex(prevEmphasize => {
-        if (prevEmphasize >= event.length - 1) {
-            setStartIndex(0); 
-            return 0; 
-        }
-
-        const newEmphasizeIndex = prevEmphasize + 1;
-
-        setStartIndex(prevStart => {
-            const lastPossibleStart = event.length - EVENT_VIEW_COUNT;
-            
-            if (prevStart >= lastPossibleStart) {
-                return prevStart;
+    const goPrev = () => {
+        setEmphasizeIndex(prev => {
+            if (prev <= 0) {
+                const lastIdx = event.length - 1;
+                setStartIndex(Math.max(0, event.length - EVENT_VIEW_COUNT));
+                return lastIdx;
             }
-
-            const SLIDING_TRIGGER_OFFSET = 2; 
-            if ((newEmphasizeIndex - prevStart) > SLIDING_TRIGGER_OFFSET) {
-                return prevStart + 1; 
-            }
-            
-            return prevStart;
+            const next = prev - 1;
+            setStartIndex(prevStart => (next - prevStart < 1 && prevStart > 0 ? prevStart - 1 : prevStart));
+            return next;
         });
+    };
 
-        return newEmphasizeIndex;
-    });
-};
+    const goNext = () => {
+        setEmphasizeIndex(prev => {
+            if (prev >= event.length - 1) {
+                setStartIndex(0);
+                return 0;
+            }
+            const next = prev + 1;
+            setStartIndex(prevStart => {
+                const lastPossible = event.length - EVENT_VIEW_COUNT;
+                if (prevStart >= lastPossible) return prevStart;
+                return next - prevStart > 2 ? prevStart + 1 : prevStart;
+            });
+            return next;
+        });
+    };
 
-    const indicatorSelect = (e: React.MouseEvent<HTMLButtonElement> ,index : number) => {
-
+    const selectTab = (e: React.MouseEvent<HTMLButtonElement>, index: number) => {
         e.preventDefault();
-
-        const lastPossibleStartIndex = event.length - EVENT_VIEW_COUNT;
-
         setEmphasizeIndex(index);
-
-        if ( index > 2 ) {
-            const calculatedStartIndex = index - 2;
-            const newStartIndex = Math.min(calculatedStartIndex, lastPossibleStartIndex);
-            setStartIndex(newStartIndex);
+        if (index > 2) {
+            setStartIndex(Math.min(index - 2, event.length - EVENT_VIEW_COUNT));
         } else {
             setStartIndex(0);
         }
-        
-    }
+    };
 
-    const openExternalWindow = ( e:React.MouseEvent<HTMLAnchorElement> ,url: string) => {
-        
-        e.preventDefault();
+    if (loading) return <div className={pageStyle.card}><p className={pageStyle.stateBox}>불러오는 중...</p></div>;
+    if (error) return <div className={pageStyle.card}><p className={`${pageStyle.stateBox} ${pageStyle.errorBox}`}>{error}</p></div>;
+    if (!event.length) return <div className={pageStyle.card}><p className={pageStyle.stateBox}>진행 중인 이벤트가 없습니다.</p></div>;
 
-        openExternal(url);
-
-    }
-
-    if(loading) {
-        return(
-            <div>
-                <p>로딩중...</p>
-            </div>
-        )
-    }
-
-    if(error) {
-        return (
-            <div>
-                <p>에러 발생 : {error}</p>
-            </div>
-        )
-    }
-
-    if(!event) {
-        return (
-            <div>
-                <p>진행 중인 이벤트가 없습니다.</p>
-            </div>
-        )
-    }
-
-    const Title_Slice = event.slice(startIndex, startIndex + EVENT_VIEW_COUNT);
+    const visibleTabs = event.slice(startIndex, startIndex + EVENT_VIEW_COUNT);
+    const current = event[emphasizeIndex];
 
     return (
-        <div>
-            <div>
-                <h2>이벤트</h2>
-                <a
-                    onClick={(e)=>openExternalWindow(e, event[emphasizeIndex].Link)}
-                >
-                    <img src = {event[emphasizeIndex].Thumbnail}/>
-                </a>
+        <div className={pageStyle.card}>
+            <h2 className={pageStyle.cardTitle}>이벤트</h2>
+            <a onClick={e => { e.preventDefault(); openExternal(current.Link); }} style={{ cursor: 'pointer' }}>
+                <img src={current.Thumbnail} alt={current.Title} className={style.thumbnail} />
+            </a>
+            <div className={style.navRow}>
+                <button className={style.navBtn} onClick={goPrev}><SlArrowLeft /></button>
+                <div className={style.tabList}>
+                    {visibleTabs.map((ev, i) => {
+                        const actualIdx = startIndex + i;
+                        return (
+                            <button
+                                key={ev.Link}
+                                className={`${style.tab} ${emphasizeIndex === actualIdx ? style.active : ''}`}
+                                onClick={e => selectTab(e, actualIdx)}
+                                title={ev.Title}
+                            >
+                                {ev.Title}
+                            </button>
+                        );
+                    })}
+                </div>
+                <button className={style.navBtn} onClick={goNext}><SlArrowRight /></button>
             </div>
-
-            <div>
-                <button
-                    onClick={eventPrevBefore}
-                >
-                    <SlArrowLeft />
-                </button>
-
-                {Title_Slice.map((event, index)=> {
-                    const actualTitle = startIndex + index;
-                    return(
-                        <button
-                            key={event.Link}
-                            className={`${emphasizeIndex === actualTitle ? style.active : ''}`}
-                            onClick={(e)=>indicatorSelect(e,actualTitle)}
-
-                        >
-                            {event.Title}
-                        </button>
-                    )
-                })}
-
-                <button
-                    onClick={eventPrevNext}
-                >
-                    <SlArrowRight />
-                </button>
-            </div>
-
         </div>
-    )
-}
+    );
+};
 
 export default EventComponent;

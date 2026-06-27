@@ -1,0 +1,29 @@
+.favoritesBox {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1.25rem;
+    background-color: #27272a;
+    border-radius: 0.75rem;
+    border: 1px dashed #3f3f46;
+    min-height: 60px;
+}
+
+.label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #fafafa;
+}
+
+.badge {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 9999px;
+    background-color: #3f3f46;
+    color: #a1a1aa;
+}
+
+.hint {
+    font-size: 0.8rem;
+    color: #52525b;
+}

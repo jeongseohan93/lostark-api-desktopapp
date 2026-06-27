@@ -1,0 +1,88 @@
+.list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+}
+
+.contentItem {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+}
+
+.icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 0.375rem;
+    border: 1px solid #3f3f46;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 0;
+}
+
+.nameLine {
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+}
+
+.name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #fafafa;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.itemLevel {
+    font-size: 0.75rem;
+    color: #a1a1aa;
+    white-space: nowrap;
+}
+
+.time {
+    font-size: 0.78rem;
+    color: #60a5fa;
+}
+
+.rewardContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin-top: 0.25rem;
+}
+
+.rewardIcon {
+    width: 28px;
+    height: 28px;
+    border-radius: 0.25rem;
+    border: 2px solid transparent;
+    object-fit: cover;
+}
+
+/* 아이템 등급 테두리 색상 */
+.Grade-일반  { border-color: #9d9d9d; }
+.Grade-고급  { border-color: #1eff00; }
+.Grade-희귀  { border-color: #0070dd; }
+.Grade-영웅  { border-color: #a335ee; }
+.Grade-전설  { border-color: #ff8000; }
+.Grade-유물  { border-color: #e06c30; }
+.Grade-고대  { border-color: #cca800; }
+
+.noItemText {
+    color: #71717a;
+    font-size: 0.875rem;
+    text-align: center;
+    padding: 1rem 0;
+}

@@ -1,3 +1,74 @@
-.active{
-  font-weight: bold;
+.thumbnail {
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    display: block;
+    transition: opacity 0.2s;
+}
+
+.thumbnail:hover {
+    opacity: 0.85;
+}
+
+.navRow {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.navBtn {
+    background: none;
+    border: 1px solid #3f3f46;
+    border-radius: 0.375rem;
+    color: #a1a1aa;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background-color 0.15s, color 0.15s;
+}
+
+.navBtn:hover {
+    background-color: #3f3f46;
+    color: #fafafa;
+}
+
+.tabList {
+    display: flex;
+    gap: 0.375rem;
+    flex: 1;
+    overflow: hidden;
+}
+
+.tab {
+    background: none;
+    border: 1px solid #3f3f46;
+    border-radius: 0.375rem;
+    color: #a1a1aa;
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px;
+    transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.tab:hover {
+    background-color: #3f3f46;
+    color: #fafafa;
+}
+
+.active {
+    background-color: #3b82f6;
+    border-color: #3b82f6;
+    color: #fff;
+    font-weight: 600;
 }

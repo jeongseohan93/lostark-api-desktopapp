@@ -1,6 +1,6 @@
 import { ipcMain } from 'electron';
 import { LostArkApiClient } from '../core/lostArkApiClient';
-import { getApiKey } from '../core/apiKeyMangement';
+import { getApiKey } from '../core/apiKeyManagement';
 
 // LostArkApiClient 인스턴스를 저장하기 위한 변수
 // 앱 전체에서 단 하나의 API 클라이언트 인스턴스를 유지하기 위해 모듈 스코프에 선언
@@ -35,53 +35,16 @@ export const initializeApiClient = async () => {
     }
 }
 
-// Renderer Process로 부터 API요청 처리하기 위한 IPC핸들러 모음
+const requireClient = () => {
+    if (!apiClient) throw new Error('API 클라이언트가 준비되지 않았습니다. API 키를 확인해주세요.');
+    return apiClient;
+};
+
 export const registerLostArkApiHandlers = async () => {
-    const isInitialized = await initializeApiClient();
+    await initializeApiClient();
 
-    // 공지사항 요청 핸들러
-    // 'get:lostark-api-notices' 채널로 들어오는 invoke 요청 처리
-    ipcMain.handle('get:lostark-api-notices', async () => {
-
-        // API 클라이언트가 성공적으로 초기화되었는지 확인(매우 중요한 방어 코드)
-        if(!isInitialized || !apiClient ) {
-
-            // 초기화 실패 시, 에러를 발생시켜 Renderer Process에 실패 알림
-            throw new Error('API 클라이언트가 준비되지 않았습니다. API 키를 확인해주세요.');
-        }
-
-        // 준비가 되었다면, apiClient 인스턴스를 통해 공지사항 정보를 요청하고 결과 반환
-        return apiClient.getNotice();
-    })
-
-    // 이벤트 요청 핸들러
-    // 'get:lostark-api-events' 채널로 들어오는 invoke 요청 처리
-    ipcMain.handle('get:lostark-api-events', async () => {
-
-        // API 클라이언트 초기화 상태 체크
-        if (!isInitialized || !apiClient) {
-            
-            // 초기화 실패 시 에러 발생
-            throw new Error('API 클라이언트가 준비되지 않았습니다. API 키를 확인해주세요.');
-        }
-
-        // 준비가 되었다면, apiClient 인스턴스를 통해 이벤트 정보를 요청하고 결과 반환
-        return apiClient.getEvents();
-    });
-
-    // 캘린더 콘텐츠 요청 핸들러
-    // 'get:lostark-api-calendar' 채널로 들어오는 invoke 요청 처리
-    ipcMain.handle('get:lostark-api-calendar', async () => {
-
-        // API 클라이언트 초기화 상태 체크
-        if (!isInitialized || !apiClient) {
-
-            // 초기화 실패 시 에러 발생
-            throw new Error('API 클라이언트가 준비되지 않았습니다. API 키를 확인해주세요.');
-        }
-        
-        // 준비가 되었다면, apiClient 인스턴스를 통해 켈린더 콘텐츠 정보를 요청하고 결과 반환
-        return apiClient.getCalendar();
-    });
+    ipcMain.handle('get:lostark-api-notices', () => requireClient().getNotice());
+    ipcMain.handle('get:lostark-api-events', () => requireClient().getEvents());
+    ipcMain.handle('get:lostark-api-calendar', () => requireClient().getCalendar());
 }
 

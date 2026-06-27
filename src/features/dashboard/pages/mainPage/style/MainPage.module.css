@@ -1,11 +1,61 @@
 .mainPageGrid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 400px;
-    grid-template-areas: 
-    "event event event";
-
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+        "favorites favorites favorites"
+        "island worldevents event"
+        "notices notices notices";
+    gap: 1rem;
 }
-.event {
-    grid-area: event;
+
+.favoritesArea { grid-area: favorites; }
+.islandArea    { grid-area: island; }
+.worldArea     { grid-area: worldevents; }
+.eventArea     { grid-area: event; }
+.noticesArea   { grid-area: notices; }
+
+/* 공통 카드 */
+.card {
+    background-color: #27272a;
+    border-radius: 0.75rem;
+    border: 1px solid #3f3f46;
+    padding: 1.25rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.cardTitle {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #fafafa;
+    margin: 0 0 1rem 0;
+    padding-bottom: 0.625rem;
+    border-bottom: 1px solid #3f3f46;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cardTitle::before {
+    content: '';
+    display: inline-block;
+    width: 3px;
+    height: 1rem;
+    background-color: #3b82f6;
+    border-radius: 2px;
+}
+
+.stateBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80px;
+    color: #a1a1aa;
+    font-size: 0.875rem;
+}
+
+.errorBox {
+    color: #f87171;
 }
