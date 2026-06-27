@@ -81,7 +81,7 @@ export function expectedAttempts(lv: EnhancementLevel): number {
     for (let i = 0; i < simRuns; i++) {
         let attempts = 0;
         let fails = 0;
-        while (true) {
+        while (attempts < 10_000) {
             attempts++;
             const rate = Math.min(1, lv.baseSuccessRate + fails * lv.pityCap);
             if (Math.random() < rate) break;
