@@ -1,0 +1,190 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: #1c1c1f;
+    color: #c5c6c7;
+    padding: 1.25rem;
+    overflow-y: auto;
+    gap: 1rem;
+}
+
+.title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fafafa;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.rangeRow {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+    background-color: #2a2a2e;
+    border: 1px solid #3f3f46;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+}
+
+.rangeBox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.rangeBox label { font-size: 0.82rem; color: #a1a1aa; }
+
+.rangeBox select {
+    padding: 0.35rem 0.6rem;
+    background-color: #1c1c1f;
+    border: 1px solid #3f3f46;
+    border-radius: 6px;
+    color: #fafafa;
+    font-size: 0.85rem;
+}
+
+.arrow { font-size: 1.2rem; color: #6b46c1; }
+
+.fetchBtn {
+    padding: 0.4rem 1rem;
+    background-color: #6b46c1;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 0.85rem;
+    cursor: pointer;
+    margin-left: auto;
+    white-space: nowrap;
+}
+
+.fetchBtn:hover { background-color: #7c3aed; }
+.fetchBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.error {
+    color: #f87171;
+    font-size: 0.82rem;
+    background: rgba(248,113,113,0.1);
+    border: 1px solid #f87171;
+    border-radius: 6px;
+    padding: 0.5rem 0.75rem;
+}
+
+.subTitle {
+    font-size: 0.8rem;
+    color: #71717a;
+    margin: 0 0 0.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.priceGrid {
+    background-color: #2a2a2e;
+    border: 1px solid #3f3f46;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    flex-shrink: 0;
+}
+
+.priceRow {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.4rem;
+}
+
+.matName {
+    min-width: 180px;
+    font-size: 0.85rem;
+    color: #fafafa;
+}
+
+.bundleLabel {
+    font-size: 0.72rem;
+    color: #71717a;
+    min-width: 60px;
+}
+
+.priceInput {
+    width: 100px;
+    padding: 0.3rem 0.5rem;
+    background-color: #1c1c1f;
+    border: 1px solid #3f3f46;
+    border-radius: 6px;
+    color: #fafafa;
+    font-size: 0.82rem;
+}
+
+.goldLabel { font-size: 0.8rem; color: #facc15; }
+
+.resultBox {
+    background: linear-gradient(135deg, #1e1b4b, #2e1e5e);
+    border: 1px solid #6b46c1;
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    flex-shrink: 0;
+}
+
+.resultTotal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+    color: #c4b5fd;
+}
+
+.totalGold {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #facc15;
+}
+
+.matSummary { display: flex; flex-direction: column; gap: 0.3rem; }
+
+.matRow {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.8rem;
+    color: #a1a1aa;
+}
+
+.matQty { color: #fafafa; font-weight: 500; }
+.matGold { color: #facc15; margin-left: auto; }
+
+.levelTable { flex-shrink: 0; }
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+}
+
+.table th, .table td {
+    padding: 0.4rem 0.75rem;
+    border: 1px solid #3f3f46;
+    text-align: center;
+}
+
+.table th { background-color: #27272a; color: #a1a1aa; }
+.table td { background-color: #1c1c1f; }
+
+.goldCell { color: #facc15; font-weight: 600; }
+
+.hint {
+    color: #52525b;
+    font-size: 0.875rem;
+    text-align: center;
+    padding: 2rem;
+}
+
+.note {
+    font-size: 0.72rem;
+    color: #52525b;
+    margin: 0;
+    flex-shrink: 0;
+}

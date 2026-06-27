@@ -12,12 +12,17 @@ import CharacterSearchPage from './pages/characterSearchPage/CharacterSearchPage
 import EnergyOfLifePage from './pages/energyOfLifePage/EnergyOfLifePage';
 import CombatPowerPage from './pages/combatPowerPage/CombatPowerPage';
 import FavoritesPage from './pages/favoritesPage/FavoritesPage';
+import WeeklyGoldPage from './pages/weeklyGoldPage/WeeklyGoldPage';
+import EnhancementPage from './pages/enhancementPage/EnhancementPage';
+import AuctionSniperPage from './pages/auctionSniperPage/AuctionSniperPage';
 import { FavoritesProvider } from '../../shared/context/FavoritesContext';
+import { AuctionSniperProvider } from '../../shared/context/AuctionSniperContext';
 
 const DashBoard = () => {
     useWindowSize(1200, 700);
   return (
     <FavoritesProvider>
+      <AuctionSniperProvider>
       <div className={style.appLayout}>
         <TitleBar />
         <div className={style.mainContent}>
@@ -32,10 +37,14 @@ const DashBoard = () => {
               <Route path = "/lifeEnergy" element={<EnergyOfLifePage/>}/>
               <Route path = "/combatPower" element={<CombatPowerPage/>}/>
               <Route path = "/favorites" element={<FavoritesPage/>}/>
+              <Route path = "/weeklyGold" element={<WeeklyGoldPage/>}/>
+              <Route path = "/enhancement" element={<EnhancementPage/>}/>
+              <Route path = "/auctionSniper" element={<AuctionSniperPage/>}/>
             </Routes>
           </main>
         </div>
       </div>
+      </AuctionSniperProvider>
     </FavoritesProvider>
   );
 };

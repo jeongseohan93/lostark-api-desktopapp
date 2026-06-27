@@ -1,0 +1,253 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: #1c1c1f;
+    color: #c5c6c7;
+    padding: 1.25rem;
+    overflow: hidden;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+    flex-shrink: 0;
+}
+
+.title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fafafa;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.totalBadge {
+    background: linear-gradient(135deg, #3b1f6e, #4c2b8a);
+    border: 1px solid #6b46c1;
+    border-radius: 8px;
+    padding: 0.4rem 1rem;
+    font-size: 0.85rem;
+    color: #c4b5fd;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.totalBadge span:first-of-type {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #facc15;
+}
+
+.charLimit {
+    font-size: 0.72rem !important;
+    color: #71717a !important;
+    font-weight: normal !important;
+}
+
+.charInputRow {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    flex-shrink: 0;
+}
+
+.input {
+    padding: 0.4rem 0.75rem;
+    background-color: #2a2a2e;
+    border: 1px solid #3f3f46;
+    border-radius: 6px;
+    color: #fafafa;
+    font-size: 0.85rem;
+    width: 140px;
+}
+
+.addBtn {
+    padding: 0.4rem 1rem;
+    background-color: #6b46c1;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 0.85rem;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.addBtn:hover { background-color: #7c3aed; }
+
+.empty {
+    color: #52525b;
+    font-size: 0.875rem;
+    padding: 3rem;
+    text-align: center;
+}
+
+.tableWrap {
+    flex: 1;
+    overflow: auto;
+}
+
+.table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+
+.table th, .table td {
+    border: 1px solid #3f3f46;
+    padding: 0.4rem 0.5rem;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.thChar {
+    background-color: #27272a;
+    text-align: left !important;
+    min-width: 180px;
+    position: sticky;
+    left: 0;
+    z-index: 2;
+}
+
+.thRaid {
+    background-color: #27272a;
+    min-width: 80px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.raidName { font-weight: 600; color: #fafafa; font-size: 0.82rem; }
+.raidDiff { font-size: 0.68rem; font-weight: 600; }
+.raidIlvl { font-size: 0.68rem; color: #71717a; }
+.raidGoldTotal { font-size: 0.72rem; color: #facc15; margin-top: 0.2rem; }
+
+.goldEditor {
+    margin-top: 0.3rem;
+    background-color: #1c1c1f;
+    border: 1px solid #52525b;
+    border-radius: 4px;
+    padding: 0.3rem;
+    font-size: 0.7rem;
+    text-align: left;
+}
+
+.gateEdit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.3rem;
+    margin-bottom: 0.2rem;
+    color: #a1a1aa;
+}
+
+.gateEdit input {
+    width: 60px;
+    padding: 0.1rem 0.3rem;
+    background-color: #27272a;
+    border: 1px solid #3f3f46;
+    border-radius: 3px;
+    color: #fafafa;
+    font-size: 0.7rem;
+}
+
+.thGold {
+    background-color: #27272a;
+    min-width: 100px;
+    position: sticky;
+    right: 28px;
+    z-index: 2;
+}
+
+.tdChar {
+    background-color: #1c1c1f;
+    text-align: left !important;
+    position: sticky;
+    left: 0;
+    z-index: 1;
+}
+
+.charLabel {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+}
+
+.charName { font-weight: 600; color: #fafafa; }
+.charLevel { color: #facc15; font-size: 0.75rem; }
+
+.noGoldBadge {
+    font-size: 0.65rem;
+    background-color: #3f3f46;
+    color: #71717a;
+    padding: 0.1rem 0.3rem;
+    border-radius: 999px;
+}
+
+.tdRaid { background-color: #1c1c1f; }
+
+.gateRow {
+    display: flex;
+    gap: 0.2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.gateBtn {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1px solid #3f3f46;
+    background-color: #2a2a2e;
+    color: #52525b;
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: all 0.12s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gateOn {
+    background-color: #6b46c1;
+    border-color: #7c3aed;
+    color: #fff;
+}
+
+.gateBtn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.na { color: #3f3f46; }
+
+.tdGold {
+    position: sticky;
+    right: 28px;
+    background-color: #1c1c1f;
+    z-index: 1;
+}
+
+.goldValue { color: #facc15; font-weight: 700; font-size: 0.85rem; }
+.goldValueGray { color: #52525b; font-size: 0.85rem; }
+
+.removeBtn {
+    background: none;
+    border: none;
+    color: #52525b;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0 0.25rem;
+}
+.removeBtn:hover { color: #f87171; }
+
+.rowDisabled { opacity: 0.5; }
+.rowNoGold { opacity: 0.7; }
+
+.note {
+    font-size: 0.72rem;
+    color: #52525b;
+    margin-top: 0.5rem;
+    flex-shrink: 0;
+}
