@@ -243,3 +243,17 @@
     color: #71717a;
     padding: 0 0.5rem;
 }
+
+.starBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: #444;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    transition: color 0.15s, transform 0.1s;
+    line-height: 1;
+}
+.starBtn:hover { color: #facc15; transform: scale(1.2); }
+.starred { color: #facc15 !important; }

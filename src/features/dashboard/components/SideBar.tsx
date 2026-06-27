@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import style from '../style/SideBar.module.css';
-import { FiMenu, FiHome, FiShoppingCart, FiRepeat, FiSearch, FiPackage, FiSettings, FiBarChart2 } from "react-icons/fi";
+import { FiMenu, FiHome, FiShoppingCart, FiRepeat, FiSearch, FiPackage, FiSettings, FiBarChart2, FiStar } from "react-icons/fi";
 import { FaLeaf } from 'react-icons/fa';
 import { openSetting } from '../../../shared/api/IpcSetting';
 
@@ -58,6 +58,11 @@ const SideBar = () => {
           <NavLink to = "/combatPower" className={getNavLinkClass}>
             <FiBarChart2 className={style.icon} />
             <span className={style.iconLabel}>전투력 역추산</span>
+          </NavLink>
+
+          <NavLink to = "/favorites" className={getNavLinkClass}>
+            <FiStar className={style.icon} />
+            <span className={style.iconLabel}>즐겨찾기</span>
           </NavLink>
 
         </div>

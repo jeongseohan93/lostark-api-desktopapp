@@ -1,0 +1,236 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: #1c1c1f;
+    color: #c5c6c7;
+    padding: 1.25rem;
+    overflow-y: auto;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    flex-shrink: 0;
+}
+
+.title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fafafa;
+    margin: 0;
+}
+
+.status {
+    font-size: 0.75rem;
+    color: #71717a;
+}
+
+.empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    gap: 0.5rem;
+    color: #71717a;
+    font-size: 0.9rem;
+}
+
+.emptySub {
+    font-size: 0.8rem;
+    color: #52525b;
+}
+
+.cardList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.card {
+    background-color: #2a2a2e;
+    border: 1px solid #3f3f46;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.cardHeader {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.75rem;
+}
+
+.itemInfo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-width: 200px;
+}
+
+.itemIcon {
+    width: 36px;
+    height: 36px;
+    border-radius: 4px;
+    object-fit: cover;
+    background-color: #1c1c1f;
+}
+
+.itemName {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.grade {
+    font-size: 0.7rem;
+    color: #71717a;
+    margin-left: 0.4rem;
+}
+
+.priceRow {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 140px;
+}
+
+.currentPrice {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #facc15;
+}
+
+.polledAt {
+    font-size: 0.7rem;
+    color: #52525b;
+}
+
+.noData {
+    font-size: 0.8rem;
+    color: #52525b;
+    font-style: italic;
+}
+
+.cardActions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-left: auto;
+}
+
+.alertBadge {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    background-color: rgba(248, 113, 113, 0.15);
+    border: 1px solid #f87171;
+    border-radius: 999px;
+    padding: 0.15rem 0.5rem;
+    font-size: 0.72rem;
+    color: #f87171;
+}
+
+.clearAlert {
+    background: none;
+    border: none;
+    color: #f87171;
+    cursor: pointer;
+    padding: 0;
+    font-size: 0.9rem;
+    line-height: 1;
+}
+
+.alertInput {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.alertInput input {
+    width: 100px;
+    padding: 0.25rem 0.5rem;
+    background-color: #1c1c1f;
+    border: 1px solid #52525b;
+    border-radius: 4px;
+    color: #fafafa;
+    font-size: 0.8rem;
+}
+
+.alertInput button {
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    border: 1px solid #52525b;
+    background-color: #3f3f46;
+    color: #fafafa;
+    font-size: 0.78rem;
+    cursor: pointer;
+}
+
+.alertInput button:first-of-type {
+    background-color: #7c3aed;
+    border-color: #7c3aed;
+}
+
+.setAlertBtn {
+    padding: 0.25rem 0.65rem;
+    background-color: transparent;
+    border: 1px solid #3f3f46;
+    border-radius: 4px;
+    color: #a1a1aa;
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s;
+    white-space: nowrap;
+}
+
+.setAlertBtn:hover {
+    background-color: #3f3f46;
+    color: #fafafa;
+}
+
+.removeBtn {
+    padding: 0.25rem 0.65rem;
+    background-color: transparent;
+    border: 1px solid #3f3f46;
+    border-radius: 4px;
+    color: #facc15;
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: background-color 0.15s;
+    white-space: nowrap;
+}
+
+.removeBtn:hover { background-color: #3f3f4640; }
+
+.chartWrap {
+    margin-top: 0.5rem;
+}
+
+.noChart {
+    text-align: center;
+    padding: 1.5rem;
+    color: #52525b;
+    font-size: 0.82rem;
+    background-color: #1c1c1f;
+    border-radius: 4px;
+}
+
+.tooltip {
+    background-color: #1c1c1f;
+    border: 1px solid #3f3f46;
+    border-radius: 6px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+    color: #c5c6c7;
+}
+
+.tooltipLabel {
+    color: #71717a;
+    margin: 0 0 0.25rem;
+    font-size: 0.72rem;
+}

@@ -11,27 +11,32 @@ import PackageEfficiencyPage from './pages/packageEfficiencyPage/PackageEfficien
 import CharacterSearchPage from './pages/characterSearchPage/CharacterSearchPage';
 import EnergyOfLifePage from './pages/energyOfLifePage/EnergyOfLifePage';
 import CombatPowerPage from './pages/combatPowerPage/CombatPowerPage';
+import FavoritesPage from './pages/favoritesPage/FavoritesPage';
+import { FavoritesProvider } from '../../shared/context/FavoritesContext';
 
 const DashBoard = () => {
     useWindowSize(1200, 700);
   return (
-    <div className={style.appLayout}>
-      <TitleBar />
-      <div className={style.mainContent}>
-        <SideBar />
-        <main className={style.contentArea}>
-          <Routes>
-            <Route index element={<MainPage />}/>
-            <Route path = "/market" element={<MarketPage />}/>
-            <Route path = "/auction" element={<ActionPage/>}/>
-            <Route path = "/chSearch" element={<CharacterSearchPage/>}/>
-            <Route path = "/package" element={<PackageEfficiencyPage/>}/>
-            <Route path = "/lifeEnergy" element={<EnergyOfLifePage/>}/>
-            <Route path = "/combatPower" element={<CombatPowerPage/>}/>
-          </Routes>
-        </main>
+    <FavoritesProvider>
+      <div className={style.appLayout}>
+        <TitleBar />
+        <div className={style.mainContent}>
+          <SideBar />
+          <main className={style.contentArea}>
+            <Routes>
+              <Route index element={<MainPage />}/>
+              <Route path = "/market" element={<MarketPage />}/>
+              <Route path = "/auction" element={<ActionPage/>}/>
+              <Route path = "/chSearch" element={<CharacterSearchPage/>}/>
+              <Route path = "/package" element={<PackageEfficiencyPage/>}/>
+              <Route path = "/lifeEnergy" element={<EnergyOfLifePage/>}/>
+              <Route path = "/combatPower" element={<CombatPowerPage/>}/>
+              <Route path = "/favorites" element={<FavoritesPage/>}/>
+            </Routes>
+          </main>
+        </div>
       </div>
-    </div>
+    </FavoritesProvider>
   );
 };
 

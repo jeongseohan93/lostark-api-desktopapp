@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { getMarketsOptions, searchMarketItems } from '../../../../shared/api/IpcMarket';
 import type { MarketOptions, MarketItem, MarketSearchBody } from '../../../../shared/types/lostark.types';
+import { useFavorites } from '../../../../shared/context/FavoritesContext';
 import style from './style/MarketPage.module.css';
 
 const MarketPage = () => {
@@ -65,6 +66,7 @@ const MarketPage = () => {
         doSearch({ ...currentBody, PageNo: page });
     };
 
+    const { addFavorite, removeFavorite, isFavorite } = useFavorites();
     const totalPages = Math.max(1, Math.ceil(totalCount / 10));
     const gradeClass = (grade: string) => style[`grade-${grade}`] ?? '';
     const isInitial = !currentBody && !loading && !error;
@@ -149,6 +151,7 @@ const MarketPage = () => {
                                         <th>전일 평균</th>
                                         <th>최근 거래가</th>
                                         <th>최저가</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -168,6 +171,13 @@ const MarketPage = () => {
                                             <td className={style.goldPrice}>{item.YDayAvgPrice.toLocaleString()}</td>
                                             <td className={style.goldPrice}>{item.RecentPrice.toLocaleString()}</td>
                                             <td className={style.goldPrice}>{item.CurrentMinPrice.toLocaleString()}</td>
+                                            <td>
+                                                <button
+                                                    className={`${style.starBtn}${isFavorite(item.Id) ? ' ' + style.starred : ''}`}
+                                                    onClick={() => isFavorite(item.Id) ? removeFavorite(item.Id) : addFavorite(item)}
+                                                    title={isFavorite(item.Id) ? '즐겨찾기 해제' : '즐겨찾기 추가'}
+                                                >★</button>
+                                            </td>
                                         </tr>
                                     ))}
                                 </tbody>

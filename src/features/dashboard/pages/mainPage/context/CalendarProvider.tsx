@@ -3,6 +3,39 @@ import { CalendarContext } from './CalendarContext';
 import { CalendarEvent } from '../types/Lostark.types';
 import { getContentInfo } from '../../../../../shared/api/IpcMainPage';
 
+function scheduleEventNotifications(events: CalendarEvent[]) {
+    if (typeof Notification === 'undefined') return;
+    Notification.requestPermission();
+
+    const now = Date.now();
+    const timers: ReturnType<typeof setTimeout>[] = [];
+
+    const addTimer = (name: string, isoTime: string) => {
+        const start = new Date(isoTime).getTime();
+        const notices = [
+            { delta: 10 * 60 * 1000, label: '10분 후 시작!' },
+            { delta: 1 * 60 * 1000,  label: '1분 후 시작!' },
+        ];
+        for (const { delta, label } of notices) {
+            const fireAt = start - delta;
+            if (fireAt > now) {
+                timers.push(setTimeout(() => {
+                    if (Notification.permission === 'granted') {
+                        new Notification(`⚔️ ${name}`, { body: label });
+                    }
+                }, fireAt - now));
+            }
+        }
+    };
+
+    for (const event of events) {
+        if (!event.StartTimes) continue;
+        for (const t of event.StartTimes) addTimer(event.ContentsName, t);
+    }
+
+    return () => timers.forEach(clearTimeout);
+}
+
 /**
  * @interface CalendarProviderProps
  * @description CalendarProvider 컴포넌트의 props 타입 정의
@@ -88,6 +121,13 @@ export const CalendarProvider = ({ children }: CalendarProviderProps) => {
         }),
         [allEvents, todayString]
     );
+
+    // 이벤트 데이터가 로드되면 알림 타이머 설정
+    useEffect(() => {
+        if (!allEvents.length) return;
+        const cleanup = scheduleEventNotifications(allEvents);
+        return cleanup;
+    }, [allEvents]);
 
     // Context에 제공할 최종 값 객체
     const value = {
