@@ -3,15 +3,16 @@
   justify-content: space-between;
   align-items: center;
   height: 2.5rem;
-  padding: 0 0.5rem; /* 버튼 영역을 고려해 좌우 패딩 약간 조절 */
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding: 0 0.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  background-color: #151516;
   -webkit-app-region: drag;
 }
 
 .titlelabel {
   color: white;
   font-size: 15px;
-  padding-left: 0.5rem; /* 제목 왼쪽에만 패딩 추가 */
+  padding-left: 0.5rem;
 }
 
 .windowControls {

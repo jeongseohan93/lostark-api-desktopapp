@@ -1,87 +1,92 @@
-import { useState } from 'react';
+import { type MouseEvent, useState } from 'react';
+import { SlArrowLeft, SlArrowRight } from 'react-icons/sl';
 import { useEvent } from '../hooks/useLostArkEvent';
 import { openExternal } from '../../../../../shared/api/IpcWindow';
-import { SlArrowLeft, SlArrowRight } from 'react-icons/sl';
 import pageStyle from '../style/MainPage.module.css';
 import style from '../style/EventComponent.module.css';
 
-const EVENT_VIEW_COUNT = 4;
+const MAX_EVENT_DOTS = 10;
 
 const EventComponent = () => {
     const { event, loading, error } = useEvent();
-    const [startIndex, setStartIndex] = useState(0);
     const [emphasizeIndex, setEmphasizeIndex] = useState(0);
 
     const goPrev = () => {
-        setEmphasizeIndex(prev => {
-            if (prev <= 0) {
-                const lastIdx = event.length - 1;
-                setStartIndex(Math.max(0, event.length - EVENT_VIEW_COUNT));
-                return lastIdx;
-            }
-            const next = prev - 1;
-            setStartIndex(prevStart => (next - prevStart < 1 && prevStart > 0 ? prevStart - 1 : prevStart));
-            return next;
-        });
+        setEmphasizeIndex(prev => (prev <= 0 ? event.length - 1 : prev - 1));
     };
 
     const goNext = () => {
-        setEmphasizeIndex(prev => {
-            if (prev >= event.length - 1) {
-                setStartIndex(0);
-                return 0;
-            }
-            const next = prev + 1;
-            setStartIndex(prevStart => {
-                const lastPossible = event.length - EVENT_VIEW_COUNT;
-                if (prevStart >= lastPossible) return prevStart;
-                return next - prevStart > 2 ? prevStart + 1 : prevStart;
-            });
-            return next;
-        });
+        setEmphasizeIndex(prev => (prev >= event.length - 1 ? 0 : prev + 1));
     };
 
-    const selectTab = (e: React.MouseEvent<HTMLButtonElement>, index: number) => {
+    const selectTab = (e: MouseEvent<HTMLButtonElement>, index: number) => {
         e.preventDefault();
         setEmphasizeIndex(index);
-        if (index > 2) {
-            setStartIndex(Math.min(index - 2, event.length - EVENT_VIEW_COUNT));
-        } else {
-            setStartIndex(0);
-        }
     };
 
-    if (loading) return <div className={pageStyle.card}><p className={pageStyle.stateBox}>불러오는 중...</p></div>;
-    if (error) return <div className={pageStyle.card}><p className={`${pageStyle.stateBox} ${pageStyle.errorBox}`}>{error}</p></div>;
-    if (!event.length) return <div className={pageStyle.card}><p className={pageStyle.stateBox}>진행 중인 이벤트가 없습니다.</p></div>;
+    if (loading) {
+        return (
+            <div className={`${pageStyle.card} ${style.eventCard}`}>
+                <p className={pageStyle.stateBox}>불러오는 중...</p>
+            </div>
+        );
+    }
 
-    const visibleTabs = event.slice(startIndex, startIndex + EVENT_VIEW_COUNT);
-    const current = event[emphasizeIndex];
+    if (error) {
+        return (
+            <div className={`${pageStyle.card} ${style.eventCard}`}>
+                <p className={`${pageStyle.stateBox} ${pageStyle.errorBox}`}>{error}</p>
+            </div>
+        );
+    }
+
+    if (!event.length) {
+        return (
+            <div className={`${pageStyle.card} ${style.eventCard}`}>
+                <p className={pageStyle.stateBox}>진행 중인 이벤트가 없습니다.</p>
+            </div>
+        );
+    }
+
+    const current = event[emphasizeIndex] ?? event[0];
+    const visibleDots = event.slice(0, MAX_EVENT_DOTS);
+    const hiddenDotCount = Math.max(event.length - visibleDots.length, 0);
 
     return (
-        <div className={pageStyle.card}>
-            <h2 className={pageStyle.cardTitle}>이벤트</h2>
-            <a onClick={e => { e.preventDefault(); openExternal(current.Link); }} style={{ cursor: 'pointer' }}>
+        <div className={`${pageStyle.card} ${style.eventCard}`}>
+            <div className={style.heroHeader}>
+                <span className={style.updateBadge}>UPDATE</span>
+                <h2>LOST ARK</h2>
+            </div>
+
+            <a
+                className={style.heroLink}
+                href={current.Link}
+                onClick={e => { e.preventDefault(); openExternal(current.Link); }}
+            >
                 <img src={current.Thumbnail} alt={current.Title} className={style.thumbnail} />
+                <span className={style.eventTitle}>{current.Title}</span>
             </a>
+
             <div className={style.navRow}>
-                <button className={style.navBtn} onClick={goPrev}><SlArrowLeft /></button>
-                <div className={style.tabList}>
-                    {visibleTabs.map((ev, i) => {
-                        const actualIdx = startIndex + i;
-                        return (
-                            <button
-                                key={ev.Link}
-                                className={`${style.tab} ${emphasizeIndex === actualIdx ? style.active : ''}`}
-                                onClick={e => selectTab(e, actualIdx)}
-                                title={ev.Title}
-                            >
-                                {ev.Title}
-                            </button>
-                        );
-                    })}
+                <button className={style.navBtn} onClick={goPrev} aria-label="이전 이벤트">
+                    <SlArrowLeft />
+                </button>
+                <div className={style.dotList}>
+                    {visibleDots.map((ev, index) => (
+                        <button
+                            key={ev.Link}
+                            className={`${style.dot} ${emphasizeIndex === index ? style.activeDot : ''}`}
+                            onClick={e => selectTab(e, index)}
+                            title={ev.Title}
+                            aria-label={`${index + 1}번 이벤트`}
+                        />
+                    ))}
+                    {hiddenDotCount > 0 && <span className={style.moreDot}>+{hiddenDotCount}</span>}
                 </div>
-                <button className={style.navBtn} onClick={goNext}><SlArrowRight /></button>
+                <button className={style.navBtn} onClick={goNext} aria-label="다음 이벤트">
+                    <SlArrowRight />
+                </button>
             </div>
         </div>
     );

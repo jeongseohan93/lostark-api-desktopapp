@@ -1,61 +1,231 @@
-.mainPageGrid {
+.launcherPage {
+    min-height: calc(100vh - 4.6rem);
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto auto auto;
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 360px);
+    grid-template-rows: auto minmax(330px, auto) minmax(210px, auto) auto auto;
     grid-template-areas:
-        "favorites favorites favorites"
-        "island worldevents event"
-        "notices notices notices";
+        "brand brand"
+        "event notices"
+        "island worldevents"
+        "favorites favorites"
+        "dock dock";
     gap: 1rem;
+    color: #f5f5f5;
 }
 
-.favoritesArea { grid-area: favorites; }
-.islandArea    { grid-area: island; }
-.worldArea     { grid-area: worldevents; }
-.eventArea     { grid-area: event; }
-.noticesArea   { grid-area: notices; }
+.brandStrip {
+    grid-area: brand;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    min-width: 0;
+}
 
-/* 공통 카드 */
+.gameEmblem,
+.dockIcon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background:
+        linear-gradient(145deg, rgba(241, 190, 86, 0.24), rgba(20, 20, 22, 0.94)),
+        #202024;
+    color: #f7d283;
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0;
+}
+
+.brandCopy {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 0;
+}
+
+.brandCopy h1 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 2rem;
+    line-height: 1;
+    letter-spacing: 0;
+}
+
+.statePill {
+    align-self: flex-start;
+    padding: 0.18rem 0.55rem;
+    border-radius: 999px;
+    background-color: #3f73ff;
+    color: #ffffff;
+    font-size: 0.72rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.eventArea { grid-area: event; min-width: 0; }
+.noticesArea { grid-area: notices; min-width: 0; }
+.islandArea { grid-area: island; min-width: 0; }
+.worldArea { grid-area: worldevents; min-width: 0; }
+.favoritesArea { grid-area: favorites; min-width: 0; }
+
 .card {
-    background-color: #27272a;
-    border-radius: 0.75rem;
-    border: 1px solid #3f3f46;
-    padding: 1.25rem;
+    height: 100%;
+    min-width: 0;
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    padding: 1.15rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    background: rgba(32, 32, 34, 0.94);
+    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.22);
 }
 
 .cardTitle {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #fafafa;
-    margin: 0 0 1rem 0;
-    padding-bottom: 0.625rem;
-    border-bottom: 1px solid #3f3f46;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-}
-
-.cardTitle::before {
-    content: '';
-    display: inline-block;
-    width: 3px;
-    height: 1rem;
-    background-color: #3b82f6;
-    border-radius: 2px;
+    justify-content: space-between;
+    gap: 0.7rem;
+    margin: 0 0 0.95rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0;
 }
 
 .stateBox {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 80px;
-    color: #a1a1aa;
-    font-size: 0.875rem;
+    min-height: 120px;
+    margin: 0;
+    color: #9a9aa1;
+    font-size: 0.9rem;
 }
 
 .errorBox {
-    color: #f87171;
+    color: #ff7a7a;
+}
+
+.launcherDock {
+    grid-area: dock;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-width: 0;
+    min-height: 72px;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(14, 14, 15, 0.96);
+    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.28);
+}
+
+.dockIdentity {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    min-width: 0;
+}
+
+.dockIdentity strong {
+    color: #ffffff;
+    font-size: 1rem;
+    white-space: nowrap;
+}
+
+.dockIcon {
+    width: 40px;
+    height: 40px;
+}
+
+.dockActions {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    flex-shrink: 0;
+}
+
+.playButton,
+.iconButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 8px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: transform 0.16s ease, background-color 0.16s ease;
+}
+
+.playButton {
+    gap: 0.5rem;
+    min-width: 160px;
+    height: 46px;
+    padding: 0 1.2rem;
+    background-color: #3f73ff;
+    font-size: 0.93rem;
+    font-weight: 800;
+}
+
+.iconButton {
+    width: 46px;
+    height: 46px;
+    background-color: #343438;
+    font-size: 1.2rem;
+}
+
+.playButton:hover,
+.iconButton:hover {
+    transform: translateY(-1px);
+}
+
+.playButton:hover {
+    background-color: #5685ff;
+}
+
+.iconButton:hover {
+    background-color: #404046;
+}
+
+@media (max-width: 1040px) {
+    .launcherPage {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-template-areas:
+            "brand"
+            "event"
+            "notices"
+            "island"
+            "worldevents"
+            "favorites"
+            "dock";
+    }
+}
+
+@media (max-width: 640px) {
+    .brandCopy h1 {
+        font-size: 1.55rem;
+    }
+
+    .launcherDock {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .dockActions {
+        width: 100%;
+    }
+
+    .playButton {
+        flex: 1;
+        min-width: 0;
+    }
 }

@@ -109,16 +109,48 @@ export const CalendarProvider = ({ children }: CalendarProviderProps) => {
      */
 
     const worldEvents = useMemo(
-        () => allEvents.filter(event => {
-            const isWorldEvent = event.CategoryName === '필드보스' || event.CategoryName === '카오스게이트';
-            if (!isWorldEvent || !event.StartTimes) return false;
+        () => {
+            const todayWorldEvents = allEvents.filter(event => {
+                const isWorldEvent = event.CategoryName === '필드보스' || event.CategoryName === '카오스게이트';
+                if (!isWorldEvent || !event.StartTimes) return false;
 
-            const isToday = event.StartTimes.some(time => 
-                new Date(time).toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\. /g, '-').slice(0, -1) === todayString
-            );
-            
-            return isToday;
-        }),
+                const isToday = event.StartTimes.some(time =>
+                    new Date(time).toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\. /g, '-').slice(0, -1) === todayString
+                );
+
+                return isToday;
+            });
+
+            const chaosGateEvents = todayWorldEvents.filter(event => event.CategoryName === '카오스게이트');
+            if (chaosGateEvents.length <= 1) return todayWorldEvents;
+
+            const chaosGateStartTimes = Array.from(new Set(
+                chaosGateEvents.flatMap(event => event.StartTimes ?? []).filter(time =>
+                    new Date(time).toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\. /g, '-').slice(0, -1) === todayString
+                )
+            )).sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
+
+            const mergedChaosGate: CalendarEvent = {
+                ...chaosGateEvents[0],
+                ContentsName: '카오스게이트',
+                StartTimes: chaosGateStartTimes,
+            };
+
+            let hasAddedChaosGate = false;
+            return todayWorldEvents.reduce<CalendarEvent[]>((events, event) => {
+                if (event.CategoryName !== '카오스게이트') {
+                    events.push(event);
+                    return events;
+                }
+
+                if (!hasAddedChaosGate) {
+                    events.push(mergedChaosGate);
+                    hasAddedChaosGate = true;
+                }
+
+                return events;
+            }, []);
+        },
         [allEvents, todayString]
     );
 

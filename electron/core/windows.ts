@@ -1,10 +1,11 @@
 import { BrowserWindow } from "electron";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 // main.ts에 정의된 Vite 개발 서버 Url과 렌더러 빌드 경로
 import { VITE_DEV_SERVER_URL, RENDERER_DIST } from '../main';
 
 // 현재 파일의 디렉토리 경로를 계산, ESM 환경에서 __dirname을 구현
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // 설정 창 인스턴스를 저장할 변수(싱글톤 패턴으로 창이 하나만 열리도록 관리)
 let settingsWin: BrowserWindow | null = null;
@@ -19,7 +20,7 @@ export const createWindow = (): BrowserWindow => {
     webPreferences: { // 웹 페이지(렌더러 프로세스) 설정
         // 렌더러 프로세스가 로드되기 전에 실행될 스크립트 경로
         // 메인-렌더러 간의 안전한 통신(IPC) 브릿지 역활
-      preload: path.join(__dirname, 'preload.mjs'),
+      preload: path.join(__dirname, 'preload.js'),
       // 보안 설정: 렌더러 프로세스를 샌드박스 환경에서 실행
       contextIsolation: true,
     },
@@ -42,7 +43,7 @@ export const createSettingsWindow = (parent: BrowserWindow): void => {
     modal: true,
     show: false,
     webPreferences: {
-      preload: path.join(__dirname,'preload.mjs'),
+      preload: path.join(__dirname,'preload.js'),
     },
   });
 

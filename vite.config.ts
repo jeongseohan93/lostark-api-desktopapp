@@ -11,6 +11,11 @@ export default defineConfig({
     electron({
       main: {
         entry: 'electron/main.ts',
+        onstart({ startup }) {
+          const env = { ...process.env };
+          delete env.ELECTRON_RUN_AS_NODE;
+          return startup(['.', '--no-sandbox'], { env });
+        },
         // main 프로세스를 위한 vite 설정을 여기에 추가합니다.
         vite: {
           build: {
