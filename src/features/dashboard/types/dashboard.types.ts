@@ -1,16 +1,16 @@
-interface RewardItem {
+export interface RewardItem {
     Name: string;
     Icon: string;
     Grade: string;
     StartTimes: string[] | null;
 }
 
-interface LevelRewardItems {
+export interface LevelRewardItems {
     ItemLevel: number;
     Items: RewardItem[];
 }
 
-interface ContentsCalendar {
+export interface ContentsCalendar {
     CategoryName: string;
     ContentsName: string;
     ContentsIcon: string;
@@ -20,7 +20,7 @@ interface ContentsCalendar {
     RewardItems: LevelRewardItems[];
 }
 
-interface SidebarProps {
+export interface SidebarProps {
     isCollapsed: boolean;
     onToggleCollapse: () => void;
 }

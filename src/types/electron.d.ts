@@ -45,6 +45,11 @@ export interface IElectronAPI {
     getAuctionsOptions: () => Promise<AuctionOptions>;
     searchAuctionItems: (body: AuctionSearchBody) => Promise<AuctionSearchResponse>;
 
+    // 로컬 DB 저장소
+    getLocalData:    (key: string) => Promise<string | null>;
+    setLocalData:    (key: string, value: string) => Promise<{ success: boolean }>;
+    deleteLocalData: (key: string) => Promise<{ success: boolean }>;
+
     // 시스템
     onMainProcessMessage: (callback: (message: MainProcessMessage) => void) => void;
 }

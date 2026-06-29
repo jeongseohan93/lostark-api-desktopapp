@@ -6,6 +6,7 @@ import { registerApiManagement } from './apiKeyManagement';
 import { registerCharacterHandlers } from './characterHandlers';
 import { registerMarketHandlers } from './marketHandlers';
 import { registerAuctionHandlers } from './auctionHandlers';
+import { registerLocalStoreHandlers } from './localStoreHandlers';
 
 export const registerFeatureHandlers = (win: BrowserWindow): void => {
     registerWindowControlsHandlers(win);
@@ -15,4 +16,5 @@ export const registerFeatureHandlers = (win: BrowserWindow): void => {
     registerCharacterHandlers();
     registerMarketHandlers();
     registerAuctionHandlers();
+    registerLocalStoreHandlers();
 };

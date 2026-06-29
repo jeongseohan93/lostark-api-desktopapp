@@ -113,7 +113,7 @@
   gap: 0.5rem;
 }
 
-.searchButton, .resetButton {
+.searchButton, .resetButton, .favoriteButton {
   padding: 0 2rem;
   border-radius: 4px;
   border: none;
@@ -129,6 +129,23 @@
   background-color: #4a4a50;
   color: #c5c6c7;
   font-size: 1.2rem;
+}
+
+.favoriteButton {
+  background-color: #3f3f46;
+  border: 1px solid #5b5b63;
+  color: #f4d69a;
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.favoriteButton:hover {
+  background-color: #4b4b53;
+}
+
+.favoriteButton:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
 }
 
 .infoText {

@@ -45,7 +45,7 @@ const MainPage = () => {
                         <strong>LOST ARK</strong>
                     </div>
                     <div className={style.dockActions}>
-                        <button className={style.playButton} onClick={() => navigate('/market')}>
+                        <button className={style.playButton} onClick={() => navigate('/trade/market')}>
                             <FiPlay />
                             거래소 보기
                         </button>

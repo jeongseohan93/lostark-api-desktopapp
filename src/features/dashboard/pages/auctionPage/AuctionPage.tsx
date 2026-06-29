@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { getAuctionsOptions, searchAuctionItems } from '../../../../shared/api/IpcAuction';
 import type { AuctionOptions, AuctionItem, AuctionSearchBody } from '../../../../shared/types/lostark.types';
+import { useFavorites } from '../../../../shared/context/FavoritesContext';
 import style from './style/AuctionPage.module.css';
 
 const formatRemaining = (dateStr: string): string => {
@@ -25,6 +26,7 @@ const AuctionPage = () => {
     const [totalCount, setTotalCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [currentBody, setCurrentBody] = useState<AuctionSearchBody | null>(null);
+    const { addAuctionFavorite, isAuctionFavorite } = useFavorites();
 
     useEffect(() => {
         getAuctionsOptions()
@@ -74,6 +76,12 @@ const AuctionPage = () => {
         setError(null);
     };
 
+    const handleSaveFavoriteCondition = () => {
+        const body = currentBody ?? buildBody();
+        const label = itemName.trim() || '경매장 검색 조건';
+        addAuctionFavorite(label, body);
+    };
+
     const handleCategorySelect = (code: number) => {
         setSelectedCategoryCode(code);
         const body: AuctionSearchBody = { Sort: 'BUY_PRICE', CategoryCode: code, PageNo: 1 };
@@ -92,6 +100,8 @@ const AuctionPage = () => {
     const totalPages = Math.max(1, Math.ceil(totalCount / 10));
     const gradeClass = (grade: string) => style[`grade-${grade}`] ?? '';
     const isInitial = !currentBody && !loading && !error;
+    const favoriteBody = currentBody ?? buildBody();
+    const isCurrentFavorite = isAuctionFavorite(favoriteBody);
 
     const keyEngravings = (item: AuctionItem) =>
         item.Options.filter(o => o.Type === 'ABILITY_ENGRAVE').slice(0, 3);
@@ -169,6 +179,13 @@ const AuctionPage = () => {
                     <div className={style.searchActions}>
                         <button className={style.searchButton} onClick={handleSearch} disabled={loading}>
                             {loading ? '...' : '검색'}
+                        </button>
+                        <button
+                            className={style.favoriteButton}
+                            onClick={handleSaveFavoriteCondition}
+                            disabled={loading || isCurrentFavorite}
+                        >
+                            {isCurrentFavorite ? '저장됨' : '조건 즐겨찾기'}
                         </button>
                         <button className={style.resetButton} onClick={handleReset} disabled={loading}>↻</button>
                     </div>

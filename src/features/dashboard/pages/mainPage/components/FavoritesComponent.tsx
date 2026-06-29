@@ -13,20 +13,20 @@ const GRADE_COLOR: Record<string, string> = {
 };
 
 const FavoritesComponent = () => {
-    const { favorites, priceHistory, lastPolled } = useFavorites();
+    const { favorites, auctionFavorites, priceHistory, lastPolled } = useFavorites();
     const navigate = useNavigate();
 
-    if (favorites.length === 0) {
+    if (favorites.length === 0 && auctionFavorites.length === 0) {
         return (
             <div className={style.favoritesBox}>
                 <span className={style.label}>즐겨찾기</span>
-                <span className={style.hint}>거래소에서 별 버튼으로 아이템을 추가하세요.</span>
+                <span className={style.hint}>거래소 아이템이나 경매장 조건을 추가하세요.</span>
             </div>
         );
     }
 
     return (
-        <div className={style.favoritesBox} onClick={() => navigate('/favorites')} style={{ cursor: 'pointer' }}>
+        <div className={style.favoritesBox} onClick={() => navigate('/trade/favorites')} style={{ cursor: 'pointer' }}>
             <div className={style.titleRow}>
                 <span className={style.label}>즐겨찾기</span>
                 {lastPolled && (
@@ -62,6 +62,9 @@ const FavoritesComponent = () => {
                 })}
                 {favorites.length > 6 && (
                     <span className={style.more}>+{favorites.length - 6}</span>
+                )}
+                {auctionFavorites.length > 0 && (
+                    <span className={style.more}>경매 {auctionFavorites.length}</span>
                 )}
             </div>
         </div>

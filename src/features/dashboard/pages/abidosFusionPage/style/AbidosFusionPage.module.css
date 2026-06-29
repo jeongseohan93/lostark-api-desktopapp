@@ -1,0 +1,279 @@
+.page {
+  min-height: 100%;
+  padding: 1.25rem;
+  box-sizing: border-box;
+  background: #1b1b1d;
+  color: #d7d7dc;
+  overflow-y: auto;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.title {
+  margin: 0;
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.subtitle {
+  margin: 0.35rem 0 0;
+  color: #8f8f98;
+  font-size: 0.86rem;
+}
+
+.recommendBadge {
+  flex-shrink: 0;
+  border-radius: 6px;
+  padding: 0.48rem 0.72rem;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.good {
+  background: rgba(34, 197, 94, 0.14);
+  border: 1px solid rgba(34, 197, 94, 0.45);
+  color: #86efac;
+}
+
+.bad {
+  background: rgba(245, 158, 11, 0.13);
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  color: #f6d58a;
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.summaryCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.32rem;
+  min-width: 0;
+  padding: 0.9rem;
+  background: #28282c;
+  border: 1px solid #3b3b42;
+  border-radius: 8px;
+}
+
+.summaryLabel {
+  color: #92929b;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.summaryCard strong {
+  color: #ffffff;
+  font-size: 1.05rem;
+}
+
+.positive {
+  color: #86efac !important;
+}
+
+.negative {
+  color: #fca5a5 !important;
+}
+
+.contentGrid {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.9fr) minmax(420px, 1.1fr);
+  gap: 1rem;
+}
+
+.panel,
+.breakdown {
+  background: #28282c;
+  border: 1px solid #3b3b42;
+  border-radius: 8px;
+}
+
+.panel {
+  padding: 1rem;
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.8rem;
+}
+
+.panelTitle {
+  margin: 0 0 0.8rem;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.panelHeader .panelTitle {
+  margin: 0;
+}
+
+.fieldGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.fieldGrid label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+.fieldWide {
+  grid-column: 1 / -1;
+}
+
+.fieldGrid span {
+  color: #92929b;
+  font-size: 0.73rem;
+  font-weight: 700;
+}
+
+.fieldGrid input,
+.materialRow input {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 0.55rem 0.65rem;
+  background: #18181a;
+  border: 1px solid #414148;
+  border-radius: 6px;
+  color: #f7f7f7;
+  font-size: 0.86rem;
+}
+
+.fieldGrid input:focus,
+.materialRow input:focus {
+  outline: none;
+  border-color: #d59b36;
+}
+
+.inlineInput {
+  display: flex;
+  gap: 0.45rem;
+}
+
+.inlineInput input {
+  flex: 1;
+}
+
+.inlineInput button,
+.materialRow button,
+.addButton {
+  border: 1px solid #4b4b52;
+  border-radius: 6px;
+  background: #36363b;
+  color: #f2f2f2;
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+.inlineInput button,
+.materialRow button {
+  padding: 0 0.72rem;
+}
+
+.inlineInput button:hover,
+.materialRow button:hover,
+.addButton:hover {
+  background: #46464d;
+}
+
+.inlineInput button:disabled,
+.materialRow button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.message {
+  margin: 0.85rem 0 0;
+  color: #f6d58a;
+  font-size: 0.8rem;
+}
+
+.addButton {
+  padding: 0.42rem 0.68rem;
+}
+
+.materialList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.materialRow {
+  display: grid;
+  grid-template-columns: minmax(160px, 1.3fr) 84px 110px auto auto;
+  gap: 0.45rem;
+  align-items: center;
+}
+
+.materialName {
+  min-width: 160px;
+}
+
+.removeButton {
+  color: #fca5a5 !important;
+}
+
+.breakdown {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  margin-top: 1rem;
+  overflow: hidden;
+}
+
+.breakdown div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+  padding: 0.85rem 1rem;
+  border-right: 1px solid #3b3b42;
+}
+
+.breakdown div:last-child {
+  border-right: 0;
+}
+
+.breakdown span {
+  color: #92929b;
+  font-size: 0.73rem;
+  font-weight: 700;
+}
+
+.breakdown strong {
+  color: #ffffff;
+  font-size: 0.88rem;
+}
+
+@media (max-width: 1040px) {
+  .summaryGrid,
+  .contentGrid,
+  .breakdown {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .materialRow {
+    grid-template-columns: 1fr 80px;
+  }
+}

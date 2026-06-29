@@ -44,6 +44,11 @@ export const lostarkAPI = {
     getAuctionsOptions: () => ipcRenderer.invoke('get:auctions-options'),
     searchAuctionItems: (body: unknown) => ipcRenderer.invoke('search:auction-items', body),
 
+    // ── 로컬 DB 저장소 ───────────────────────────────────
+    getLocalData:    (key: string) => ipcRenderer.invoke('local-store:get', key),
+    setLocalData:    (key: string, value: string) => ipcRenderer.invoke('local-store:set', key, value),
+    deleteLocalData: (key: string) => ipcRenderer.invoke('local-store:delete', key),
+
     // ── 시스템 메시지 ─────────────────────────────────────
     onMainProcessMessage: (callback: (message: MainProcessMessage) => void) => {
         ipcRenderer.on('main-process-message', (_event, message: MainProcessMessage) => callback(message));

@@ -11,6 +11,7 @@
 .header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 1rem;
     margin-bottom: 1.25rem;
     flex-shrink: 0;
@@ -24,8 +25,45 @@
 }
 
 .status {
+    display: block;
+    margin-top: 0.3rem;
     font-size: 0.75rem;
     color: #71717a;
+}
+
+.refreshBtn {
+    padding: 0.45rem 0.8rem;
+    border: 1px solid #52525b;
+    border-radius: 6px;
+    background-color: #2f2f35;
+    color: #fafafa;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.refreshBtn:hover {
+    background-color: #3b3b42;
+}
+
+.refreshBtn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    margin-bottom: 1.1rem;
+}
+
+.sectionTitle {
+    margin: 0;
+    color: #a1a1aa;
+    font-size: 0.82rem;
+    font-weight: 800;
 }
 
 .empty {
@@ -107,6 +145,20 @@
 .polledAt {
     font-size: 0.7rem;
     color: #52525b;
+}
+
+.upText,
+.downText {
+    font-size: 0.72rem;
+    font-weight: 800;
+}
+
+.upText {
+    color: #f87171;
+}
+
+.downText {
+    color: #4ade80;
 }
 
 .noData {
